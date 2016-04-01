@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+	<input type="text" name="username" id="username" value="" placeholder="username" />
+	<span class="info"></span>
+	<br/>
+	<input type="password" name="password" value="" placeholder="password" />
+	<br />
+	<button>提交</button>
+	
+	<script>
+		$(document).ready(function() {
+			
+			//$.getScript("testDemo.js");
+			
+			var $username = $("#username");
+			$username.bind('blur', function() {
+				$.get("/HealthyRoom1.0/JqueryDemoAJAX",{
+					username: $username.val()
+				}, function(data, textStatus) {
+					$(".info").text(data);
+				});
+			});
+		});
+	</script>
+</body>
+</html>

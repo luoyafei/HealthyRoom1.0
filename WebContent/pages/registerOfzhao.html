@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="../../favicon.ico">
+
+		<title>用户注册</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="../assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<link href="" type="" />
+		<!-- Custom styles for this template -->
+		<link href="../assets/bootstrap-3.3.5/docs/examples/signin/signin.css" rel="stylesheet">
+
+		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+		<script src="../assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			body {
+				background: url("../assets/img/login/324234.jpg");
+			}
+			
+			a:hover {
+				text-decoration: none;
+			}
+			
+			i {
+				font-style: normal;
+			}
+			
+			.container {
+				width: 100%;
+				height: 100%;
+				font-family: "微软雅黑";
+			}
+			
+			.page-header {
+				text-align: center;
+				/*background-color: #000000;*/
+				color: snow;
+			}
+			
+			.main {
+				width: 30%;
+				margin: 4% auto 0 auto;
+				padding: 10px;
+				background-color: white;
+				border-radius: 5px;
+				opacity: 0.9;
+			}
+			
+			.main-login {
+				padding: 10px auto;
+			}
+			
+			.form-control {
+				width: 95%;
+			}
+			
+			.forget-password {
+				float: left;
+			}
+			
+			.register {
+				float: right;
+			}
+			
+			.other-login {
+				float: left;
+			}
+			
+			.other-detail {
+				margin-bottom: 20px;
+			}
+			
+			label {
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="page-header">
+				<h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;用户注册</h1>
+			</div>
+			
+			<div class="massage-error" style="text-align: center;height: 5px;">
+					<div class="alert alert-danger alert-email" role="alert" style="display: none">请输入您的邮箱</div>
+					<div class="alert alert-danger alert-check-email" role="alert" style="display:none;"><span class="email-error"></span></div>
+					
+					<div class="alert alert-danger alert-password" role="alert" style="display: none;">请输入您的密码</div>
+					<div class="alert alert-danger alert-repassword" role="alert" style="display: none;">请核实密码与确认密码是一致的</div>
+			</div>
+			<div class="main">
+				
+				<div class="main-login">
+					<form action="../RegisterResult" method="post" name="form" onsubmit="return checkdata()">
+						<div class="form-group" style="margin-top: 20px;">
+							<input type="email" class="form-control" name="username" id="exampleInputEmail1" placeholder="邮箱" onblur="checkemail()">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="密码" onblur="chechpassword()">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="repassword" id="exampleInputPassword2" placeholder="确认密码" onblur="chechrepassword()">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="InputIdentifyCode" id="InputIdentifyCode" onblur="checkIdentifyCode()">
+							<span class="label label-default" id="IdentifyCode"></span>
+							<span class="badge" id="regetIdentify" onclick="regetIdentifyCode()">点击重新获取获取</span>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" checked="checked"> 我已阅读并同意</input>
+								<a href="#">《二手交易平台用户协议》</a>
+							</label>
+						</div>
+						<input type="hidden" name="action" value="register" />
+						<button type="submit" class="btn btn-success btn-l btn-block">确认注册</button>
+					</form>
+				</div>
+				<div class="main-buttom">
+					<div class="register">
+						<b></h6>已有账户?<a href="../index.html">马上登陆</a></b>
+					</div>
+					<br />
+				</div>
+			</div>
+		</div>
+		<!-- Bootstrap core JavaScript
+	    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="../assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
+		<script src="../assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
+		<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+		<script src="../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+	</body>
+	<script>
+		<!--
+		var str = "";
+
+		function regetIdentifyCode() {
+			str = "";
+			var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+			for (var i = 0; i < 4; i++) {
+				str += arr[Math.round(Math.random() * arr.length)];
+			}
+			$("#IdentifyCode").text(str);
+		}
+
+		function checkIdentifyCode() {
+			if($("#InputIdentifyCode").val() !== str) {
+				$("#IdentifyCode").text("error");
+			} else {
+				//return true;
+			}
+		}
+
+		function checkemail() {
+			var email = $("#exampleInputEmail1").val().trim();
+			var alertemail = $(".alert-email");
+			var checkemail = $(".alert-check-email");
+			if (email === "") {
+				alertemail.attr("style", "display:inline-block;");
+				checkemail.attr("style", "display:none;");
+			}
+			//当email的输入非空时，进行ajax验证
+			var xmlhttp = null;
+			if (email !== "") {
+				alertemail.attr("style", "display:none;");
+				if (window.XMLHttpRequest) {
+					xmlhttp = new XMLHttpRequest();
+				} else if (window.ActiveXObject) {
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+				}
+				if (xmlhttp === null) {
+					alert("无法创建XMLHttpRequest对象");
+					return;
+				}
+				xmlhttp.open("GET", "../CheckUsernameForAJAX?username=" + email, true);
+				xmlhttp.onreadystatechange = function() {
+					if (xmlhttp.readyState == 4) {
+						if (xmlhttp.status == 200) {
+							var result = xmlhttp.responseText;
+							//alert(result);
+							checkemail.attr("style", "display:inline-block;");
+							$(".email-error").text(result);
+						} else {
+							alert(xmlhttp.status);
+						}
+					}
+				}
+				xmlhttp.send(null);
+			}
+		}
+
+		function chechpassword() {
+			var password = $("#exampleInputPassword1").val().trim();
+			if (password === "") {
+				$(".alert-password").attr("style", "display:inline-block;");
+			} else {
+				$(".alert-password").attr("style", "display:none;");
+			}
+		}
+
+		function chechrepassword() {
+			var password = $("#exampleInputPassword1").val().trim();
+			var repassword = $("#exampleInputPassword2").val().trim();
+			if (repassword === "" || password !== repassword) {
+				$(".alert-repassword").attr("style", "display:inline-block;");
+			} else if (password === repassword) {
+				$(".alert-repassword").attr("style", "display:none;");
+			}
+		}
+
+		function checkdata() {
+			var email = $("#exampleInputEmail1").val().trim();
+			var password = $("#exampleInputPassword1").val().trim();
+			var repassword = $("#exampleInputPassword2").val().trim();
+			if (email === "" || password === "" || repassword === "") {
+				alert("请您将信息填写完整");
+				return false;
+			} else if (password !== repassword) {
+				alert("密码与确认密码必须一致！")
+				return false;
+			} else {
+				//				alert("true");
+				return true;
+			}
+		}
+		-->
+	</script>
+
+</html>

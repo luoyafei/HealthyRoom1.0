@@ -1,6 +1,7 @@
 							function func() {
 								$('#myModal').modal('show');
 							}
+							
 							/* 此为点击确认登录后，验证 模态框内的用户名和密码*/
 							function checkModalData() {
 								var username = $("#modal-email").val().trim();

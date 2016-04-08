@@ -51,7 +51,7 @@ public class DealUploadPicture extends HttpServlet {
 		
 		if(session == null || session.getAttribute("userInfo")==null) {
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
-			return;
+			//return;
 		}
 		User u = (User) session.getAttribute("userInfo");
 		String userId = String.valueOf(u.getUserId());
@@ -70,7 +70,8 @@ public class DealUploadPicture extends HttpServlet {
 			os.write(b);
 		}
 		
-		String photourl = "/HealthyRoom1.0/userassets/userPhoto/" + userPhotoName + ".jpg";
+		/*String photourl = "/HealthyRoom1.0/userassets/userPhoto/" + userPhotoName + ".jpg";*/
+		String photourl = userPhotoName + ".jpg";
 		os.flush();
 		os.close();
 		is.close();
@@ -83,7 +84,7 @@ public class DealUploadPicture extends HttpServlet {
 			System.out.println("Í¼Æ¬ÉÏ´«Ê§°Ü");
 		
 		response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
-		return;
+		//return;
 	}
 
 	/**

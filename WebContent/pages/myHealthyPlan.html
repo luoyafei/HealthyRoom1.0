@@ -1,0 +1,202 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="">
+          <h1 class="page-header" style="color: snow;font-family: '微软雅黑';">請输入您的身体数据，方便我们对您进行全方位制定健身计划！</h1>
+			<div style="width: 100%;height: 100%;">
+				<div class="input-group input-group-lg">
+				  <span class="input-group-addon">性&nbsp;&nbsp;&nbsp;别&nbsp;&nbsp;&nbsp;</span>
+	  				<select id="gendar" class="form-control">
+					  <option selected="selected">男</option>
+					  <option>女</option>
+					</select>	
+				</div>
+				<div class="input-group input-group-lg">
+				  <span class="input-group-addon">身&nbsp;&nbsp;&nbsp;高&nbsp;&nbsp;&nbsp;</span>
+				  <input type="text" id="height" class="form-control" placeholder="/cm">
+				</div>
+				
+				<div class="input-group input-group-lg">
+				  <span class="input-group-addon">体&nbsp;&nbsp;&nbsp;重&nbsp;&nbsp;&nbsp;</span>
+				  <input type="text" id="weight" class="form-control" placeholder="/kg">
+				</div>
+				
+				<div class="input-group input-group-lg">
+				  <span class="input-group-addon">三围(上)</span>
+				  <input type="text" id="BWH_B" class="form-control" placeholder="/cm">
+				</div>
+				
+				<div class="input-group input-group-lg">
+				  <span class="input-group-addon">三围(中)</span>
+				  <input type="text" id="BWH_W" class="form-control" placeholder="/cm">
+				</div>
+				
+				<div class="input-group input-group-lg">
+				  <span class="input-group-addon">三围(下)</span>
+				  <input type="text" id="BWH_H" class="form-control" placeholder="/cm">
+				</div>
+				
+				<button type="button" class="btn btn-primary btn-lg btn-block" onclick="send_plan_ajax()">开始制定计划</button>
+				<script type="text/javascript">
+				
+				
+				
+					function send_plan_ajax() {
+						
+						/* if($("#gendar option:selected").text()=="" || $("#height").val().trim()=="" || $("#weight").val().trim()=="") {
+							alert("请完善信息后进行制定计划");
+							return;
+						} */
+						
+						$.post("/HealthyRoom1.0/BackPlanData", {
+							gendar : $("#gendar option:selected").text(),
+							height : $("#height").val().trim(),
+							weight : $("#weight").val().trim(),
+							BWH_B : $("#BWH_B").val().trim(),
+							BWH_W : $("#BWH_W").val().trim(),
+							BWH_H : $("#BWH_H").val().trim()
+						}, function(data, textStatus) {
+							$('#healthyPlan').modal('show');
+							//alert(data.status);
+							var status = data.status;
+							var sex = data.sex;
+							alert(status);
+							if(sex == 1) {
+								//alert("你好先生");
+								$("#referencesImg").attr("src", "/HealthyRoom1.0/assets/img/2.jpg");
+								$("#dialogBodyTitle").text("男性标准身高体重对照表");
+								switch(status) {
+								case  -4:
+									$("#suggestInfo").text("尊敬的男士，您的身材正处于严重瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃韭菜");
+									break;
+								case -3:
+									$("#suggestInfo").text("尊敬的男士，您的身材正处于中度瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃韭菜");
+									break;
+								case -2:
+									$("#suggestInfo").text("尊敬的男士，您的身材正处于轻度瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃韭菜");
+　									break;
+								case -1:
+									$("#suggestInfo").text("尊敬的男士，您的身材正处于瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃韭菜");
+									break;
+								case  0:
+									$("#suggestInfo").text("尊敬的男士，您的身材很健康，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("建议多吃韭菜");
+									break;
+								case 1:
+									$("#suggestInfo").text("尊敬的男士，您的身材正处于超重的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃韭菜");
+									break;
+								case 2:
+									$("#suggestInfo").text("尊敬的男士，您的身材正处于轻度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃韭菜");
+									break;
+								case 3:
+									$("#suggestInfo").text("尊敬的男士，您的身材正处于中度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃韭菜");
+									break;
+								case 4:
+									$("#suggestInfo").text("尊敬的男士，您的身材正处于重度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃韭菜");
+									break;
+								default:
+									break
+								}
+								
+							} else if(sex == 0) {
+								//alert("你好女士");
+								$("#referencesImg").attr("src", "/HealthyRoom1.0/assets/img/1.jpg");
+								$("#dialogBodyTitle").text("女性标准身高体重对照表");
+								switch(status) {
+								case  -4:
+									$("#suggestInfo").text("尊敬的女士，您的身材正处于严重瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃黄瓜");
+									break;
+								case -3:
+									$("#suggestInfo").text("尊敬的女士，您的身材正处于中度瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃黄瓜");
+									break;
+								case -2:
+									$("#suggestInfo").text("尊敬的女士，您的身材正处于轻度瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃黄瓜");
+　									break;
+								case -1:
+									$("#suggestInfo").text("尊敬的女士，您的身材正处于瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃黄瓜");
+									break;
+									
+								case  0:
+									$("#suggestInfo").text("尊敬的女士，您的身材很健康，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("建议多吃黄瓜");
+									break;
+								case 1:
+									$("#suggestInfo").text("尊敬的女士，您的身材正处于超重的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃黄瓜");
+									break;
+								case 2:
+									$("#suggestInfo").text("尊敬的女士，您的身材正处于轻度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃黄瓜");
+									break;
+								case 3:
+									$("#suggestInfo").text("尊敬的女士，您的身材正处于中度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃黄瓜");
+									break;
+								case 4:
+									$("#suggestInfo").text("尊敬的女士，您的身材正处于重度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").text("多吃黄瓜");
+									break;
+							/* 	case 999:
+									$("#suggestInfo").text("尊敬的女士，你是煞笔吗？");
+									$("#detailPlan").text("请多吃黄瓜");
+									break; */
+								default:
+									break;
+								}
+								
+							}
+								
+							
+						}, "json");
+					}
+					
+				</script>
+			</div>
+							<div class="modal fade" id="healthyPlan" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">
+												<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel">关于您的身体信息以及为您制定的健身计划</h4>
+										</div>
+										<div class="modal-body">
+											<div class="form-horizontal" role="form">
+												<div style="width:100%;">
+													<h3 id="dialogBodyTitle"></h3>
+													<img id="referencesImg" src=""/>
+												</div>
+												<div class="alert alert-danger" role="alert">
+													<h3>您现在的身体状况：</h3>
+													<h4>
+														<span id="suggestInfo"></span>
+													</h4>
+												</div>
+												<div class="alert alert-info" role="alert">
+													<h3>具体健身计划安排：</h3>
+													<h4>
+														<span id="detailPlan"></span>
+													</h4>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										</div>
+									</div>
+								</div>
+							</div>
+			
+			
+ </div>

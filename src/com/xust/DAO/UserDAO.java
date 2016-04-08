@@ -26,6 +26,11 @@ public interface UserDAO {
 	public boolean SaveBusinessPublishHealthyRoomInfo(int businessId, String gymName, String gymAddr, String gymPrice,
 			String gymTel, String gymIntroduce, String photoUrl1, String photoUrl2, String photoUrl3);
 	public PublishHealthyRoom getPublishInfo(int businessId);
-	
-
+	public ArrayList<PublishHealthyRoom> getAllPubHeaRoom();//获取所有发布过的健身房信息
+	public void updateHadReadNum(int themeId, int contAmount);//将用户的已读回复进行更新！
+	public ArrayList<Theme> getAllTheme(int userId);//通过用户Id获取其发布过的所有主题帖
+	public ArrayList<Theme> getCurrentTheme(int userId, int itemId);//通过userId，获取每页需要展示的主题
+	public String getUserPhoto(int userId);//通过userId获取用户的头像！
+	public int getAllHealthyNum();//获取所有的健身房数目
+	public ArrayList<PublishHealthyRoom> getCurrentPubHeaRoom(int itemId);//获取分页健身房
 }

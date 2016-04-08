@@ -17,6 +17,51 @@ import com.xust.bean.UserDetailInfo;
 public class UserMysqlDAO implements UserDAO {
 
 	@Override
+	public ArrayList<PublishHealthyRoom> getAllPubHeaRoom() {
+		// TODO Auto-generated method stub
+		ArrayList<PublishHealthyRoom> phrs = new ArrayList<PublishHealthyRoom>();
+		Connection conn = null;
+		Statement stmt = null;
+		String sql = " select * from publishhealthyroom order by gymPublishDate desc";
+		ResultSet rs = null;
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = JDBCUtil.createStatement(conn);
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				PublishHealthyRoom phr = new PublishHealthyRoom();
+				
+				phr.setGymId(rs.getInt(1));
+				phr.setBusinessId(rs.getInt(2));
+				phr.setGymName(rs.getString(3));
+				phr.setGymIntroduce(rs.getString(4));
+				phr.setGymPicture1(rs.getString(5));
+				phr.setGymPicture2(rs.getString(6));
+				phr.setGymPicture3(rs.getString(7));
+				phr.setGymPrice(rs.getString(8));
+				phr.setGymTel(rs.getString(9));
+				phr.setGymAddress(rs.getString(10));
+				phr.setGymPublishDate(rs.getDate(11));
+				
+				phrs.add(phr);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(stmt != null)
+				JDBCUtil.closedStmt(stmt);
+			if(rs != null)
+				JDBCUtil.closedRs(rs);
+		}
+		return phrs;
+	}
+
+	@Override
 	public boolean checkUserForAJAX(String username) {
 		// TODO Auto-generated method stub
 		
@@ -358,7 +403,7 @@ public class UserMysqlDAO implements UserDAO {
 		boolean flag = true;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into theme (themeId, userId, title, cont, publishtime,contAmount) values(null, ?, ?, ?, now(), 0)";
+		String sql = "insert into theme (themeId, userId, title, cont, publishtime, contAmount, hadread) values(null, ?, ?, ?, now(), 0, 0)";
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -404,6 +449,7 @@ public class UserMysqlDAO implements UserDAO {
 				theme.setPicture(rs.getString(5));
 				theme.setPublishtime(rs.getDate(6));
 				theme.setContAmount(rs.getInt(7));
+				theme.setHadRead(rs.getInt(8));
 				
 				themes.add(theme);
 			}
@@ -421,6 +467,96 @@ public class UserMysqlDAO implements UserDAO {
 		return themes; 
 	}
 
+	
+	@Override
+	public ArrayList<Theme> getCurrentTheme(int userId, int itemId) {
+		// TODO Auto-generated method stub
+		ArrayList<Theme> themes = new ArrayList<Theme>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int startNum = itemId * 5; 
+		String sql = "select * from theme where userId = ? order by themeId desc limit ?,5";
+		ResultSet rs = null;
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = JDBCUtil.preparedStatement(conn, sql);
+			pstmt.setInt(1, userId);
+			pstmt.setInt(2, startNum);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Theme theme = new Theme();
+				theme.setThemeId(rs.getInt(1));
+				theme.setUserId(rs.getInt(2));
+				theme.setTitle(rs.getString(3));
+				theme.setCont(rs.getString(4));
+				theme.setPicture(rs.getString(5));
+				theme.setPublishtime(rs.getDate(6));
+				theme.setContAmount(rs.getInt(7));
+				theme.setHadRead(rs.getInt(8));
+				
+				themes.add(theme);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(pstmt != null)
+				JDBCUtil.closedStmt(pstmt);
+			if(rs != null)
+				JDBCUtil.closedRs(rs);
+		}
+		return themes; 
+	}
+
+	@Override
+	public ArrayList<PublishHealthyRoom> getCurrentPubHeaRoom(int itemId) {
+		// TODO Auto-generated method stub
+		
+		
+		ArrayList<PublishHealthyRoom> phrs = new ArrayList<PublishHealthyRoom>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int startNum = itemId * 3; 
+		String sql = "select * from publishhealthyroom order by gymId desc limit ?,3";
+		ResultSet rs = null;
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = JDBCUtil.preparedStatement(conn, sql);
+			pstmt.setInt(1, startNum);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				PublishHealthyRoom phr = new PublishHealthyRoom();
+				
+				phr.setGymId(rs.getInt(1));
+				phr.setBusinessId(rs.getInt(2));
+				phr.setGymName(rs.getString(3));
+				phr.setGymIntroduce(rs.getString(4));
+				phr.setGymPicture1(rs.getString(5));
+				phr.setGymPicture2(rs.getString(6));
+				phr.setGymPicture3(rs.getString(7));
+				phr.setGymPrice(rs.getString(8));
+				phr.setGymTel(rs.getString(9));
+				phr.setGymAddress(rs.getString(10));
+				phr.setGymPublishDate(rs.getDate(11));
+				
+				phrs.add(phr);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(pstmt != null)
+				JDBCUtil.closedStmt(pstmt);
+			if(rs != null)
+				JDBCUtil.closedRs(rs);
+		}
+		return phrs;
+	}
+	
 	
 	@Override
 	public ArrayList<Theme> getCurrentTheme(int itemId) {
@@ -446,6 +582,7 @@ public class UserMysqlDAO implements UserDAO {
 				theme.setPicture(rs.getString(5));
 				theme.setPublishtime(rs.getDate(6));
 				theme.setContAmount(rs.getInt(7));
+				theme.setHadRead(rs.getInt(8));
 				
 				themes.add(theme);
 			}
@@ -465,6 +602,39 @@ public class UserMysqlDAO implements UserDAO {
 
 	
 	
+	@Override
+	public String getUserPhoto(int userId) {
+		// TODO Auto-generated method stub
+		String userPhoto = "";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select userPhoto from userdetailinfo where userId = ?";
+		try {
+			
+			conn = JDBCUtil.getConnection();
+			pstmt = JDBCUtil.preparedStatement(conn, sql);
+			pstmt.setInt(1, userId);
+			rs = pstmt.executeQuery();
+			while(rs.next())
+				userPhoto = rs.getString(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(pstmt != null)
+				JDBCUtil.closedPstmt(pstmt);
+			if(rs != null)
+				JDBCUtil.closedRs(rs);
+		}
+		return userPhoto;
+	}
+
 	@Override
 	public int getUserRole(int userId) {
 		// TODO Auto-generated method stub
@@ -521,7 +691,8 @@ public class UserMysqlDAO implements UserDAO {
 			theme.setPicture(rs.getString(5));
 			theme.setPublishtime(rs.getDate(6));
 			theme.setContAmount(rs.getInt(7));
-				
+			theme.setHadRead(rs.getInt(8));
+			
 		} catch(SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -645,6 +816,7 @@ public class UserMysqlDAO implements UserDAO {
 			rs = pstmt.executeQuery();
 			rs.next();
 			username = rs.getString(1);
+//System.out.println(username);
 
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -689,6 +861,38 @@ public class UserMysqlDAO implements UserDAO {
 		return contAmount;
 	}
 
+	
+	
+	@Override
+	public int getAllHealthyNum() {
+		// TODO Auto-generated method stub
+		int allHealthyNum = 0;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from publishhealthyroom";
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = JDBCUtil.createStatement(conn);
+			rs = JDBCUtil.executeQuery(stmt, sql);
+			rs.next();
+			allHealthyNum = rs.getInt(1);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(stmt != null)
+				JDBCUtil.closedStmt(stmt);
+			if(rs != null)
+				JDBCUtil.closedRs(rs);
+		}
+
+		return allHealthyNum;
+	}
+
+	
+	
 	@Override
 	public int getAllThemeItems() {
 		// TODO Auto-generated method stub
@@ -715,5 +919,71 @@ public class UserMysqlDAO implements UserDAO {
 		}
 
 		return allThemeItems;
+	}
+
+	@Override
+	public void updateHadReadNum(int themeId, int contAmount) {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update theme set hadread = ? where themeId = ?";
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = JDBCUtil.preparedStatement(conn, sql);
+			pstmt.setInt(1, contAmount);
+			pstmt.setInt(2, themeId);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(pstmt != null)
+				JDBCUtil.closedPstmt(pstmt);
+		}
+	}
+
+	@Override
+	public ArrayList<Theme> getAllTheme(int userId) {
+		// TODO Auto-generated method stub
+		ArrayList<Theme> themes = new ArrayList<Theme>();
+		Connection conn = null;
+		//Statement stmt = null;
+		PreparedStatement pstmt = null;
+		String sql = "select * from theme where userId = ?";
+		ResultSet rs = null;
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = JDBCUtil.preparedStatement(conn, sql);
+			pstmt.setInt(1, userId);
+			//stmt = JDBCUtil.createStatement(conn);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Theme theme = new Theme();
+				theme.setThemeId(rs.getInt(1));
+				theme.setUserId(rs.getInt(2));
+				theme.setTitle(rs.getString(3));
+				theme.setCont(rs.getString(4));
+				theme.setPicture(rs.getString(5));
+				theme.setPublishtime(rs.getDate(6));
+				theme.setContAmount(rs.getInt(7));
+				theme.setHadRead(rs.getInt(8));
+				
+				themes.add(theme);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(pstmt != null)
+				JDBCUtil.closedStmt(pstmt);
+			if(rs != null)
+				JDBCUtil.closedRs(rs);
+		}
+		return themes; 
 	}
 }

@@ -83,7 +83,7 @@ public class AccomplishUserInfo extends HttpServlet {
 			System.out.println("用户数据保存失败");
 		
 		response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
-		return;
+		//return;
 	}
 
 	/**

@@ -41,7 +41,7 @@ public class DeleteTheme extends HttpServlet {
 		
 		if(session == null || session.getAttribute("userInfo")==null) {
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
-			return;
+			//return;
 		}
 		User u = (User) session.getAttribute("userInfo");
 		String userId = String.valueOf(u.getUserId());
@@ -49,7 +49,7 @@ public class DeleteTheme extends HttpServlet {
 
 		if(userId == null || themeId == null) {
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
-			return;
+			//return;
 		}
 		out.println(userId + "," + themeId);
 		
@@ -68,7 +68,7 @@ public class DeleteTheme extends HttpServlet {
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
 		} else
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
-		return;
+		//return;
 	}
 
 	/**

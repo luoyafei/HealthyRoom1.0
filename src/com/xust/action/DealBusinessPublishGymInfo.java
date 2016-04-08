@@ -72,7 +72,8 @@ public class DealBusinessPublishGymInfo extends HttpServlet {
 		OutputStream[] outputs = new OutputStream[3];
 		for(int j = 0; j < inputs.length; j++) {
 			String fileurl = "G:\\Eclipse\\Project\\EclipseEEProject\\HealthyRoom1.0\\WebContent\\business_healthyroomUp\\" + gymName + j + ".jpg";
-			photoUrls[j] = "/HealthyRoom1.0/business_healthyroomUp/" + gymName + j + ".jpg";
+			/*photoUrls[j] = "/HealthyRoom1.0/business_healthyroomUp/" + gymName + j + ".jpg";*/
+			photoUrls[j] = gymName + j + ".jpg";
 			File f = new File(fileurl);
 			outputs[j] = new FileOutputStream(f);
 		}
@@ -121,12 +122,13 @@ public class DealBusinessPublishGymInfo extends HttpServlet {
 		boolean insertResult = UserManager.getInstance().SaveBusinessPublishHealthyRoomInfo(businessId, gymName, gymAddr, gymPrice, gymTel, gymIntroduce, photoUrls[0], photoUrls[1], photoUrls[2]);
 		if(insertResult) {
 			System.out.println("商家发布健身房信息成功！");
-			response.sendRedirect("/HealthyRoom1.0/pages/business_authority/business_pulish_healthyroom_page.jsp");
-			return;
+			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp");
+			//this.getServletConfig().getServletContext().getRequestDispatcher("/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp").forward(request, response);
+			//return;
 		} else {
 			System.out.println("商家发布健身房信息失败！");
 			response.sendRedirect("/HealthyRoom1.0/pages/business_authority/business_pulish_healthyroom_page.jsp");
-			return;
+			//return;
 		}
 		
 		

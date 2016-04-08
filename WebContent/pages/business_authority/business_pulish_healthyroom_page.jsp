@@ -73,7 +73,7 @@
 					<li><a class="text-primary" href="#">关于我们</a></li>
 					<li><a class="text-primary"
 						href="<%=base%>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
-					<li><a class="text-primary" href="#">活动中心</a></li>
+					<li><a class="text-primary" href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">看健身房</a></li>
 					<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Search">
@@ -90,20 +90,32 @@
 							userId = u.getUserId();
 							userName = u.getUsername();//已经登陆的用户名
 							//System.out.println(u.getUsername());
+					List<Theme> themes = UserManager.getInstance().getAllTheme(u.getUserId());
+							int notReadNum = 0;
+							
+							for(Iterator<Theme> items = themes.iterator(); items.hasNext();) {
+								Theme item = items.next();
+								int hadRead = item.getHadRead();
+								//int itemReply = UserManager.getInstance().getAllReplyTheme(item.getThemeId()).size();
+								int contAmount = UserManager.getInstance().getTotleThemeReply(item.getThemeId());
+								if(hadRead != contAmount) {
+									notReadNum += contAmount-hadRead;
+								}
+							}
 					%>
 					<div class="navbar-form pull-right">
-						<a href="#"><span class="glyphicon glyphicon-user"
-							aria-hidden="true"></span>&nbsp;&nbsp;<%=u.getUsername()%> </a> <a
-							class="dropdown-toggle" data-toggle="dropdown"> <span
-							class="caret"></span> <span class="sr-only">Toggle
-								Dropdown</span>
-						</a>
+						<a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;<%=u.getUsername() %><span class="badge" style="background-color: red;">
+							<%=notReadNum %>
+						</span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown"> 
+						<span class="caret"></span> <span class="sr-only">Toggle
+							Dropdown</span> </a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="<%=base%>/pages/action.jsp">个人中心</a></li>
-							<li><a href="#">我的健身房</a></li>
-							<li><a href="#">我的消息</a></li>
+							<li><a href="/HealthyRoom1.0/pages/action.jsp">个人中心</a></li>
+							<!-- <li><a href="/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp">为我制定健身计划</a></li> -->
+							<li><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的消息 <span class="badge" style="background-color: red;"><%=notReadNum %></span></a></li>
 							<li class="divider"></li>
-							<li><a href="<%=base%>/RemoveUserSession">注销</a></li>
+							<li><a href="/HealthyRoom1.0/RemoveUserSession">注销</a></li>
 						</ul>
 					</div>
 					<%
@@ -132,7 +144,7 @@
 						style="width: 75%; height: 75%; margin: 0 auto; margin-bottom: 10px;">
 						<img class="img-circle" id="userpicture"
 							style="width: 100%; height: 100%;" alt=""
-							src="/HealthyRoom1.0/userassets/userPhoto/<%=userName%>.jpg" />
+							src="/HealthyRoom1.0/userassets/userPhoto/img/<%=userName%>.jpg" />
 					</div>
 					<div class="form-group" style="width: 100%; height: 40%;">
 						<div style="width: 100%; height: 100%; text-align: center;">
@@ -150,21 +162,13 @@
 						style="width: 100%; height: 50%; margin: 0 auto; text-align: center;">
 						<div class="btn-group-vertical" role="group" aria-label="...">
 							<ul class="nav" role="tablist">
-								<li role="presentation" class="active"><a href="#forum"
-									role="tab" data-toggle="tab">荟萃论坛</a></li>
-								<li role="presentation"><a href="#addInfo" role="tab"
-									data-toggle="tab">完善信息</a></li>
-								<li role="presentation"><a href="#myHealth" role="tab"
-									data-toggle="tab">我的健身</a></li>
-								<li role="presentation"><a href="#myFocus" role="tab"
-									data-toggle="tab">我的关注</a></li>
-								<li role="presentation"><a href="#myReply" role="tab"
-									data-toggle="tab">我的帖子</a></li>
-								<li role="presentation"><a href="#alterSource" role="tab"
-									data-toggle="tab">修改资料</a></li>
-								<li role="presentation"><a href="#alterPassword" role="tab"
-									data-toggle="tab">修改密码</a></li>
-							   
+								<li role="presentation" class="active"><a href="/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
+								<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">完善信息</a></li>
+								<li role="presentation"><a href="#myHealth">我的健身</a></li>
+								<li role="presentation"><a href="#myFocus">我的关注</a></li>
+								<li role="presentation"><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的帖子</a></li>
+								<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改资料</a></li>
+								<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改密码</a></li>
 							      <%
 								 //String roleIdStr = (String) session.getAttribute("role");
 							      int roleIdStr = (Integer)session.getAttribute("role");
@@ -219,7 +223,7 @@
 											<div class="tab-content-1"
 												style="width: 80%; height: 780px; margin: 0 auto; background-color: white;">
 												
-												<form action="<!-- /HealthyRoom1.0/DealBusinessPublishGymInfo -->" method="post" class="form-horizontal" role="form" style="margin-left: 0px;" enctype="multipart/form-data" onsubmit="checkcontent()">
+												<form action="/HealthyRoom1.0/DealBusinessPublishGymInfo" method="post" class="form-horizontal" role="form" style="margin-left: 0px;" enctype="multipart/form-data" onsubmit="<!-- checkcontent ()-->">
 													<div style="border-bottom: dashed #A9A9A9 1px;">
 														<div class="form-group"
 															style="margin-right: 0px; padding-top: 15px;">
@@ -420,9 +424,9 @@
 															class="col-sm-2 control-label"
 															style="font-size: 18px; font-weight: normal;">健身房图片</label>
 														<div class="col-sm-10">
-															<img alt="" src="<%=gymInfo.getGymPicture1() %>" style="width:30%; height: 200px;">
-															<img alt="" src="<%=gymInfo.getGymPicture2() %>" style="width:30%; height: 200px;">
-															<img alt="" src="<%=gymInfo.getGymPicture3() %>" style="width:30%; height: 200px;">
+															<img alt="" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=gymInfo.getGymName()+"0" %>.jpg" style="width:30%; height: 200px;">
+															<img alt="" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=gymInfo.getGymName()+"1" %>.jpg" style="width:30%; height: 200px;">
+															<img alt="" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=gymInfo.getGymName()+"2" %>.jpg" style="width:30%; height: 200px;">
 														</div>
 													</div>
 												</div>

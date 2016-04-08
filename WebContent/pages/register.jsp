@@ -42,6 +42,7 @@
 		  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+		
 		<style>
 			* {
 				margin: 0px;
@@ -49,7 +50,9 @@
 			}
 			
 			body {
-				background: url("../assets/img/login/4.jpg");
+				background: url("../assets/img/login/6666.jpg");
+				width: 100%;
+				height: 100%;
 			}
 			
 			a:hover {
@@ -78,6 +81,7 @@
 				padding: 10px;
 				background-color: white;
 				border-radius: 5px;
+				opacity: 0.85;
 			}
 			
 			.main-login {
@@ -113,36 +117,31 @@
 	<body>
 		<div class="container">
 			<div class="page-header">
-				<h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;个人用户</h1>
+				<h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;用户注册</h1>
 			</div>
+			
+			<div class="massage-error" style="text-align: center;height: 5px;">
+					<div class="alert alert-danger alert-email" role="alert" style="display: none">请输入您的邮箱</div>
+					<div class="alert alert-danger alert-check-email" role="alert" style="display:none;"><span class="email-error"></span></div>
+					
+					<div class="alert alert-danger alert-password" role="alert" style="display: none;">请输入您的密码</div>
+					<div class="alert alert-danger alert-repassword" role="alert" style="display: none;">请核实密码与确认密码是一致的</div>
+			</div>
+			
 			<div class="main">
-
-				<div class="other-login">
-					<h5>换种方式注册</h5>
-					<div class="other-detail">
-						<a href="#">电话注册</a>
-					</div>
-				</div>
-
 				<div class="main-login">
 					<form action="<%=base %>/RegisterResult" method="post" name="form" onsubmit="return checkdata()">
 						<hr />
-
-						<div class="form-group">
+						<div class="form-group" style="margin-top: 20px;">
 							<input type="email" class="form-control" name="username" id="exampleInputEmail1" placeholder="邮箱" onblur="checkemail()">
-							<div class="alert alert-danger alert-email" role="alert" style="display: none">请输入您的邮箱</div>
-							<div class="alert alert-danger alert-check-email" role="alert" style="display:none;"><span class="email-error"></span></div>
-
 						</div>
 
 						<div class="form-group">
 							<input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="密码" onblur="chechpassword()">
-							<div class="alert alert-danger alert-password" role="alert" style="display: none;">请输入您的密码</div>
 						</div>
 
 						<div class="form-group">
 							<input type="password" class="form-control" name="repassword" id="exampleInputPassword2" placeholder="确认密码" onblur="chechrepassword()">
-							<div class="alert alert-danger alert-repassword" role="alert" style="display: none;">请核实密码与确认密码是一致的</div>
 						</div>
 
 						<div class="form-group" style="margin: 0 auto;text-align: center;padding-bottom: 15px;">
@@ -310,5 +309,4 @@
 		regetIdentifyCodeResult = "";
 		//-->
 	</script>
-
 </html>

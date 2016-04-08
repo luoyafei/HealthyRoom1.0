@@ -11,7 +11,14 @@ public class Theme {
 	private String picture;
 	private Date publishtime;
 	private int contAmount;
+	private int hadRead;
 	
+	public int getHadRead() {
+		return hadRead;
+	}
+	public void setHadRead(int hadRead) {
+		this.hadRead = hadRead;
+	}
 	public int getThemeId() {
 		return themeId;
 	}

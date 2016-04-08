@@ -48,7 +48,7 @@ public class RegisterResult extends HttpServlet {
 //System.out.println("role" + role);
 		if(!role.equals("1") && !role.equals("2")) {
 			response.sendRedirect("/HealthyRoom1.0/pages/register.jsp");
-			return;
+			//return;
 		}
 		
 		if(action.equals("register") && username.hashCode()!=0 && password.hashCode()!=0 && identifyCode.equals(realCode)) {
@@ -57,25 +57,24 @@ public class RegisterResult extends HttpServlet {
 //System.out.println(resultOfCheckUsername);
 			if(resultOfCheckUsername) {
 				response.sendRedirect("/HealthyRoom1.0/pages/register.jsp");
-				return;
+				//return;
 			}
 			boolean result = UserManager.getInstance().saveRegister(username, password, role);
 //System.out.println(result);			
 			if(result) {
-				
 				User u = new User();
 				u.setUsername(username);
 				u.setPassword(password);
 				session.setAttribute("userInfo", u);
-				session.setAttribute("role", role);
+				session.setAttribute("role", Integer.parseInt(role));
 				response.sendRedirect("/HealthyRoom1.0/pages/action.jsp");
-				return;
+				//return;
 			} else {
 				response.sendRedirect("/HealthyRoom1.0/pages/register.jsp");
 			}
 		} else {
 			response.sendRedirect("/HealthyRoom1.0/pages/register.jsp");
-			return;
+			//return;
 		}
 		
 	}

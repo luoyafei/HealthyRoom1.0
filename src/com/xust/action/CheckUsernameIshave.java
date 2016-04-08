@@ -44,7 +44,7 @@ public class CheckUsernameIshave extends HttpServlet {
 		boolean result = UserManager.getInstance().checkUserForAJAX(username);
 		if(result) {
 			out.print("true");
-			return;
+			//return;
 		}
 		//System.out.println(result);
 		out.flush();

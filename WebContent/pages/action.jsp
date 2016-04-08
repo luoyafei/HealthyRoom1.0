@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.xust.bean.*"%>
+<%@ page import="com.xust.bean.*,com.xust.DAO.*"%>
+<%@ page import="java.util.*" %>
 <%
 	String base = request.getContextPath();
 	String jspbase = request.getServletPath();
+%>
+<%!
+	int userId;
+	String userName;
 %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -63,7 +68,7 @@
 					<li><a class="text-primary" href="#">关于我们</a></li>
 					<li><a class="text-primary"
 						href="<%=base%>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
-					<li><a class="text-primary" href="#">看健身房</a></li>
+					<li><a class="text-primary" href="/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp">看健身房</a></li>
 					<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Search">
@@ -77,22 +82,35 @@
 					<%
 						if (session.getAttribute("userInfo") != null) {
 							User u = (User) session.getAttribute("userInfo");
+							userId = u.getUserId();
+							userName = UserManager.getInstance().getUserName(userId);
 							//System.out.println(u.getUserId());
+							List<Theme> themes = UserManager.getInstance().getAllTheme(userId);
+							int notReadNum = 0;
+							
+							for(Iterator<Theme> items = themes.iterator(); items.hasNext();) {
+								Theme item = items.next();
+								int hadRead = item.getHadRead();
+								//int itemReply = UserManager.getInstance().getAllReplyTheme(item.getThemeId()).size();
+								int contAmount = UserManager.getInstance().getTotleThemeReply(item.getThemeId());
+								if(hadRead != contAmount) {
+									notReadNum += contAmount-hadRead;
+								}
+							}
 					%>
 					<div class="navbar-form pull-right">
-						<a href="#"><span class="glyphicon glyphicon-user"
-							aria-hidden="true"></span>&nbsp;&nbsp;<%=u.getUsername()%> </a> <a
-							class="dropdown-toggle" data-toggle="dropdown"> <span
-							class="caret"></span> <span class="sr-only">Toggle
-								Dropdown</span>
-						</a>
+						<a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;<%=u.getUsername() %><span class="badge" style="background-color: red;">
+							<%=notReadNum %>
+						</span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown"> 
+						<span class="caret"></span> <span class="sr-only">Toggle
+							Dropdown</span> </a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="<%=base %>/pages/action.jsp">个人中心</a></li>
-							<li><a href="#">我的健身房</a></li>
-							<li><a href="#">我的消息</a></li>
+							<li><a href="/HealthyRoom1.0/pages/action.jsp">个人中心</a></li>
+							<!-- <li><a href="/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp">为我制定健身计划</a></li> -->
+							<li><a href="/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp">我的消息 <span class="badge" style="background-color: red;"><%=notReadNum %></span></a></li>
 							<li class="divider"></li>
-							<li><a
-								href="<%=base %>/RemoveUserSession">注销</a></li>
+							<li><a href="/HealthyRoom1.0/RemoveUserSession">注销</a></li>
 						</ul>
 					</div>
 					<%
@@ -226,7 +244,7 @@
         	<div style="width: 80%;height: 30%;margin: 0 auto;margin-bottom: 20%;">
         		
         		<div style="width: 75%; height: 75%;margin: 0 auto; margin-bottom: 10px;">
-        			<img class="img-circle" style="width: 100%; height: 100%;" src="111.jpg" />
+        			<img class="img-circle" style="width: 100%; height: 100%;" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=userName %>.jpg" />
         		</div>
         		<div class="form-group" style="width: 100%;height: 40%;">
         			<div style="width: 100%;height: 100%;text-align: center;">
@@ -238,20 +256,17 @@
 				<div style="width: 100%;height: 50%;margin: 0 auto;text-align: center;">
 					<div class="btn-group-vertical" role="group" aria-label="...">
 							<ul class="nav" role="tablist">
-								<li role="presentation" class="active"><a href="#forum"
-									role="tab" data-toggle="tab">荟萃论坛</a></li>
+								<li role="presentation" class="active"><a href="/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
 								<li role="presentation"><a href="#addInfo" role="tab"
 									data-toggle="tab">完善信息</a></li>
-								<li role="presentation"><a href="#myHealth" role="tab"
-									data-toggle="tab">我的健身</a></li>
-								<li role="presentation"><a href="#myFocus" role="tab"
-									data-toggle="tab">我的关注</a></li>
 								<li role="presentation"><a href="#myReply" role="tab"
 									data-toggle="tab">我的帖子</a></li>
 								<li role="presentation"><a href="#alterSource" role="tab"
 									data-toggle="tab">修改资料</a></li>
 								<li role="presentation"><a href="#alterPassword" role="tab"
 									data-toggle="tab">修改密码</a></li>
+								<li role="presentation"><a  role="tab"
+									data-toggle="tab" href="#myHealthyPlan">制定健身计划</a></li>
 								   
 							      <%
 								 //String roleIdStr = (String) session.getAttribute("role");
@@ -277,11 +292,8 @@
 			  <div role="tabpanel" class="tab-pane" id="myHealth">
 				<div id="myHealth"></div>
 			  </div>
-			  <div role="tabpanel" class="tab-pane" id="myFocus">
-					<div id="myFocus"></div>
-			  </div>
-			  <div role="tabpanel" class="tab-pane" id="myReply">
-				<div id="myReply"></div>
+			  <div role="tabpanel" class="tab-pane" id="myHealthyPlan">
+				<div id="myHealthyPlan"></div>
 				</div>
 				
 			  <div role="tabpanel" class="tab-pane" id="alterSource">
@@ -318,6 +330,7 @@
 			$("#accomplishUserInfo").load("<%=base %>/pages/action_include/accomplishUserInfo.jsp");
 			$("#alterPassword").load("<%=base %>/pages/action_include/alterpassword.jsp");
 			$("#uploadPicture").load("<%=base %>/pages/healthyforum/userUploadPicture.jsp");
+			$("#myHealthyPlan").load("<%=base %>/pages/myHealthyPlan.html");
 			$('#myTab a').tab('show')
 		});
 	</script>

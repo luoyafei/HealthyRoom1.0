@@ -44,7 +44,7 @@ public class DealReplyTheme extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if(themeId == null || content == null) {
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
-			return;
+			//return;
 		}
 		
 		HttpSession session = request.getSession(false);
@@ -59,11 +59,11 @@ public class DealReplyTheme extends HttpServlet {
 		if(!flag) {
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/replyThemePage.jsp?themeId="+themeId);
 System.out.println("回帖失败！");
-			return;
+			//return;
 		} else {
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/replyThemePage.jsp?themeId="+themeId);
 System.out.println("回帖成功！");
-			return;
+			//return;
 		}
 		
 

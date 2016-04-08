@@ -48,10 +48,26 @@ public class UserManager {
 		return dao.getAllTheme();
 	}
 	
+	public int getAllHealthyNum() {
+		return dao.getAllHealthyNum();
+	}
+	
+	public ArrayList<Theme> getAllTheme(int userId) {
+		return dao.getAllTheme(userId);
+	}
+	
 	public ArrayList<Theme> getCurrentTheme(int itemId) {
 		return dao.getCurrentTheme(itemId);
 	}
 	
+	public ArrayList<PublishHealthyRoom> getCurrentPubHeaRoom(int itemId) {
+		return dao.getCurrentPubHeaRoom(itemId);
+	}
+	
+	
+	public ArrayList<Theme> getCurrentTheme(int userId,int itemId) {
+		return dao.getCurrentTheme(userId, itemId);
+	}
 	
 	public Theme getThemeItem(int themeId) {
 		return dao.getThemeItem(themeId);
@@ -96,6 +112,11 @@ public class UserManager {
 		// TODO Auto-generated method stub
 		return dao.getUserRole(userId);
 	}
+	
+	public String getUserPhoto(int userId) {
+		// TODO Auto-generated method stub
+		return dao.getUserPhoto(userId);
+	}
 
 	public boolean SaveBusinessPublishHealthyRoomInfo(int businessId, String gymName, String gymAddr, String gymPrice, String gymTel,
 			String gymIntroduce, String photoUrl1, String photoUrl2, String photoUrl3) {
@@ -108,5 +129,11 @@ public class UserManager {
 		
 	}
 	
+	public ArrayList<PublishHealthyRoom> getAllPubHeaRoom() {
+		return dao.getAllPubHeaRoom();
+	}
 	
+	public void updateHadReadNum(int themeId,int contAmount) {
+		dao.updateHadReadNum(themeId, contAmount);
+	}
 }

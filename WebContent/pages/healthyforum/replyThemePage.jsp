@@ -12,6 +12,8 @@
 
 <%!
 	int userId;
+	String userName;
+	//String userPhoto;
 %>
 
 <!DOCTYPE html>
@@ -73,14 +75,14 @@
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#" style="font-size: 24px;font-family: '微软雅黑';">西科梦想减肥健身行</a>
+					<a class="navbar-brand" href="/HealthyRoom1.0/index.jsp" style="font-size: 24px;font-family: '微软雅黑';">西科梦想减肥健身行</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">首页</a></li>
+						<li class="active"><a href="/HealthyRoom1.0/index.jsp">首页</a></li>
 						<li><a class="text-primary" href="#">关于我们</a></li>
 						<li><a class="text-primary" href="<%=base %>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
-						<li><a class="text-primary" href="#">活动中心</a></li>
+						<li><a class="text-primary" href="/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp">看健身房</a></li>
 						<form class="navbar-form navbar-left" role="search">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Search">
@@ -95,19 +97,36 @@
 						if (session.getAttribute("userInfo") != null) {
 							User u = (User) session.getAttribute("userInfo");
 							userId = u.getUserId();
+							userName = UserManager.getInstance().getUserName(userId);
 							//System.out.println(u.getUserId());
+							//userPhoto = UserManager.getInstance().getUserPhoto(userId);
+//System.out.println(userPhoto);
+							List<Theme> themes = UserManager.getInstance().getAllTheme(u.getUserId());
+							int notReadNum = 0;
+							
+							for(Iterator<Theme> items = themes.iterator(); items.hasNext();) {
+								Theme item = items.next();
+								int hadRead = item.getHadRead();
+								//int itemReply = UserManager.getInstance().getAllReplyTheme(item.getThemeId()).size();
+								int contAmount = UserManager.getInstance().getTotleThemeReply(item.getThemeId());
+								if(hadRead != contAmount) {
+									notReadNum += contAmount-hadRead;
+								}
+							}
+							
 					%>
 					<div class="navbar-form pull-right">
-						<a href="#"><span class="glyphicon glyphicon-user"
-							aria-hidden="true"></span>&nbsp;&nbsp;<%=u.getUsername()%> </a> <a
-							class="dropdown-toggle" data-toggle="dropdown"> <span
-							class="caret"></span> <span class="sr-only">Toggle
+						<a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;<%=u.getUsername() %><span class="badge" style="background-color: red;">
+							<%=notReadNum %>
+						</span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown"> 
+						 <span class="caret"></span> <span class="sr-only">Toggle
 								Dropdown</span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="<%=base %>/pages/action.jsp">个人中心</a></li>
-							<li><a href="#">我的健身房</a></li>
-							<li><a href="#">我的消息</a></li>
+							<!-- <li><a href="#">我的健身房</a></li> -->
+							<li><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的消息 <span class="badge" style="background-color: red;"><%=notReadNum %></span></a></li>
 							<li class="divider"></li>
 							<li><a
 								href="<%=base %>/RemoveUserSession">注销</a></li>
@@ -135,7 +154,7 @@
 					<div style="width: 80%;height: 30%;margin: 0 auto;margin-bottom: 20%;">
 
 						<div style="width: 75%; height: 75%;margin: 0 auto; margin-bottom: 10px;">
-							<img class="img-circle" style="width: 100%; height: 100%;" src="../111.jpg" />
+							<img class="img-circle" style="width: 100%; height: 100%;" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=userName %>.jpg" />
 						</div>
 						<div class="form-group" style="width: 100%;height: 40%;">
 							<div style="width: 100%;height: 100%;text-align: center;">
@@ -149,13 +168,13 @@
 
 						<div class="btn-group-vertical" role="group" aria-label="...">
 								<ul class="nav" role="tablist">
-								  <li role="presentation" class="active"><a href="#forum" role="tab" data-toggle="tab">荟萃论坛</a></li>
-								  <li role="presentation"><a href="#addInfo" role="tab" data-toggle="tab">完善信息</a></li>
-								  <li role="presentation"><a href="#myHealth" role="tab" data-toggle="tab">我的健身</a></li>
-								  <li role="presentation"><a href="#myFocus" role="tab" data-toggle="tab">我的关注</a></li>
-								  <li role="presentation"><a href="#myReply" role="tab" data-toggle="tab">我的帖子</a></li>
-							      <li role="presentation"><a href="#alterSource" role="tab" data-toggle="tab">修改资料</a></li>
-							         
+								  <li role="presentation" class="active"><a href="/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
+									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">完善信息</a></li>
+									<li role="presentation"><a href="#myHealth">我的健身</a></li>
+									<li role="presentation"><a href="#myFocus">我的关注</a></li>
+									<li role="presentation"><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的帖子</a></li>
+									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改资料</a></li>
+									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改密码</a></li>
 							      <%
 								 //String roleIdStr = (String) session.getAttribute("role");
 							      int roleIdStr = (Integer)session.getAttribute("role");
@@ -179,6 +198,12 @@
 						Theme theme = UserManager.getInstance().getThemeItem(themeId);
 						String username = UserManager.getInstance().getUserName(theme.getUserId());
 						int contAmount = UserManager.getInstance().getTotleThemeReply(themeId);
+						
+						if(userId == theme.getUserId()) {//如果该用户为此主题的楼主，则进行阅读回复数目的更新
+							UserManager.getInstance().updateHadReadNum(themeId, contAmount);
+//System.out.println("repllyThemePage:" + contAmount);
+						}
+						
 					%>
 					<h3>主题：<a class="healthyName" href="javascript:void(0)" style="font-weight: bolder;text-decoration: none;"><%=theme.getTitle() %></a></h3>
 						

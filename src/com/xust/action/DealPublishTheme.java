@@ -41,10 +41,9 @@ public class DealPublishTheme extends HttpServlet {
 		String theme = request.getParameter("theme");
 		String content = request.getParameter("content");
 		
-		PrintWriter out = response.getWriter();
 		if(theme == null || content == null) {
 			response.sendRedirect("/HealthyRoom1.0/index.jsp");
-			return;
+			//return;
 		}
 		
 		HttpSession session = request.getSession(false);
@@ -57,11 +56,11 @@ public class DealPublishTheme extends HttpServlet {
 		if(!flag) {
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
 System.out.println("发帖失败！");
-			return;
+			//return;
 		} else {
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
 System.out.println("发帖成功！");
-			return;
+			//return;
 		}
 		
 		//out.flush();

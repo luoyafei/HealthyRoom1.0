@@ -159,12 +159,10 @@ System.out.println("该用户尚未发出任何主题帖！");
 							<div class="btn-group-vertical" role="group" aria-label="...">
 								<ul class="nav" role="tablist">
 									<li role="presentation" class="active"><a href="/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
-									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">完善信息</a></li>
-									<li role="presentation"><a href="#myHealth">我的健身</a></li>
-									<li role="presentation"><a href="#myFocus">我的关注</a></li>
 									<li role="presentation"><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的帖子</a></li>
-									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改资料</a></li>
+									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改信息</a></li>
 									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改密码</a></li>
+							      	<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">制定健身计划</a></li>
 							      
 							      
 							      <%
@@ -226,7 +224,7 @@ System.out.println("该用户尚未发出任何主题帖！");
 				               <div class="main-left" style="float: left;">
 				                   <div class="img1" style="margin-right: 10px;height: 150px;">
 				                        <div style="height:80%;">
-				                       		<img class="img-circle" src="04.jpg" alt="" style="width:120px;height: 100%;">
+				                       		<img class="img-circle" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=username %>.jpg" alt="" style="width:90px;height: 80%;">
 				                       </div>
 				                       <div style="height:18%;margin-top: 1%;">
 				                       		<span style="float:left;margin-left:10px;" class="floorhost">楼主：<%=username %></span>

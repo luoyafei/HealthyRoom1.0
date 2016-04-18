@@ -85,6 +85,10 @@ public class UserManager {
 		return dao.getUserName(userId);
 	}
 	
+	public UserDetailInfo getUserDtailInfo(int userId) {
+		return dao.getUserDetailInfo(userId);
+	}
+	
 	public int getTotleThemeReply(int themeId) {
 		return dao.getTotleThemeReply(themeId);
 	}
@@ -135,5 +139,20 @@ public class UserManager {
 	
 	public void updateHadReadNum(int themeId,int contAmount) {
 		dao.updateHadReadNum(themeId, contAmount);
+	}
+
+	public int getUserId(String username) {
+		// TODO Auto-generated method stub 
+		return dao.getUserId(username);
+	}
+
+	public String updateUserPassword(int userId, String repassword, String newpassword) {
+		// TODO Auto-generated method stub
+		return dao.updateUserPassword(userId, repassword, newpassword);
+	}
+
+	public boolean deleteGym(int userId) {
+		// TODO Auto-generated method stub
+		return dao.deleteGym(userId);
 	}
 }

@@ -2,6 +2,7 @@ package com.xust.action;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -67,8 +68,11 @@ public class AccomplishUserInfo extends HttpServlet {
 		String time[] = userBirthday.split("/");
 		//Calendar c = Calendar.getInstance();
 		//c.set(Integer.parseInt(time[0]), Integer.parseInt(time[1]), Integer.parseInt(time[2]));
-		@SuppressWarnings("deprecation")
-		Date d = new Date(Integer.parseInt(time[0]), Integer.parseInt(time[1]), Integer.parseInt(time[2]));
+		String longStr = time[0] + "-" + time[1] + "-" + time[2] + " " + "00:00:00";
+System.out.println("accomplishUserInfo :" + longStr);
+		Timestamp dd = Timestamp.valueOf(longStr);
+		Date d = new Date(dd.getTime());
+		
 		userDetailInfo.setUserBirthday(d);
 		userDetailInfo.setUserTel(Integer.parseInt(userTel));
 		userDetailInfo.setUserAddress(userAddress);
@@ -82,7 +86,7 @@ public class AccomplishUserInfo extends HttpServlet {
 		else
 			System.out.println("用户数据保存失败");
 		
-		response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp");
+		response.sendRedirect("/HealthyRoom1.0/pages/action.jsp");
 		//return;
 	}
 

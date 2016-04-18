@@ -64,7 +64,7 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="<%=base %>/index.jsp">首页</a></li>
+					<li><a href="<%=base %>/index.jsp">首页</a></li>
 					<li><a class="text-primary" href="#">关于我们</a></li>
 					<li><a class="text-primary"
 						href="<%=base%>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
@@ -257,16 +257,10 @@
 					<div class="btn-group-vertical" role="group" aria-label="...">
 							<ul class="nav" role="tablist">
 								<li role="presentation" class="active"><a href="/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
-								<li role="presentation"><a href="#addInfo" role="tab"
-									data-toggle="tab">完善信息</a></li>
-								<li role="presentation"><a href="#myReply" role="tab"
-									data-toggle="tab">我的帖子</a></li>
-								<li role="presentation"><a href="#alterSource" role="tab"
-									data-toggle="tab">修改资料</a></li>
-								<li role="presentation"><a href="#alterPassword" role="tab"
-									data-toggle="tab">修改密码</a></li>
-								<li role="presentation"><a  role="tab"
-									data-toggle="tab" href="#myHealthyPlan">制定健身计划</a></li>
+								<li role="presentation"><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的帖子</a></li>
+								<li role="presentation"><a href="#addInfo" role="tab" data-toggle="tab">修改信息</a></li>
+								<li role="presentation"><a href="#alterPassword" role="tab" data-toggle="tab">修改密码</a></li>
+								<li role="presentation"><a  role="tab" data-toggle="tab" href="#myHealthyPlan">制定健身计划</a></li>
 								   
 							      <%
 								 //String roleIdStr = (String) session.getAttribute("role");
@@ -300,7 +294,47 @@
 				<div id="alterSource"></div>
 				</div>
 			  <div role="tabpanel" class="tab-pane" id="alterPassword">
-			  	<div id="alterPassword"></div>
+			  	<div id="alterPassword">
+					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				          <h1 class="page-header" style="color: #A9A9A9;font-family: '微软雅黑';">修改密码</h1>
+									<div style="width: 100%;height: 100%;">
+										
+										<div class="tab-content-1" style="width: 100%;height: 100%;margin: 0 auto; background-color: white;">
+										<div class="form-horizontal" role="form" style="margin-left: 0px;">
+											<div style="border-bottom: dashed #A9A9A9 1px;">
+												<div class="form-group" style="margin-right: 0px;margin-left: -45px;padding-top: 30px;">
+													<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">原始密码</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control" id="repassword" style="background-color: #F5F5F5;" id="create-project-name1" placeholder="">
+													</div>
+												</div>
+											</div>
+											<div style="border-bottom: dashed #A9A9A9 1px;">
+												<div class="form-group" style="margin-right: 0px;margin-left: -45px;;padding-top: 15px;">
+													<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">新&nbsp;密&nbsp;码&nbsp;</label>
+													<div class="col-sm-10">
+														<input type="password" class="form-control" id="newpassword" style="background-color: #F5F5F5;" id="create-project-name1" placeholder="">
+													</div>
+												</div>
+											</div>
+											<div style="border-bottom: dashed #A9A9A9 1px;">
+												<div class="form-group" style="margin-right: 0px;margin-left: -45px;;padding-top: 15px;">
+													<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">重复密码</label>
+													<div class="col-sm-10">
+														<input type="password" class="form-control" id="renewpassword" style="background-color: #F5F5F5;" id="create-project-name1" placeholder="">
+													</div>
+												</div>
+											</div>
+											<div style="margin: 50px auto;">
+												<div class="form-group" style="margin: 0 auto; text-align: center;">
+													<button class="btn btn-primary btn-lg btn-block" style="float: right;margin-bottom: 10px;" id="submit_btn" onclick="checkalterpassword()">提交</button>
+												</div>
+											</div>
+										</div>
+									</div>
+				 	</div>
+				 </div>
+			  	</div>
 			  </div>
 		</div>
         <!-- <div id="accomplishUserInfo"></div> -->
@@ -321,6 +355,50 @@
 	<div id="uploadPicture"></div>
 	<script>
 	
+	function checkalterpassword() {
+
+		var repassword = $("#repassword").val().trim();
+		var newpassword = $("#newpassword").val().trim();
+		var renewpassword = $("#renewpassword").val().trim();
+//alert(repassword + "," + newpassword + "," + renewpassword);
+		if(repassword != "" && newpassword != "" && renewpassword != "" && newpassword == renewpassword) {
+			
+			var xmlhttp = null;
+			if(window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			} else if(window.ActiveXObject) {
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			
+			if(xmlhttp == null) {
+				alert("无法创建XMLHttpRequest对象！");
+				return;
+			}
+			
+			var url = "/HealthyRoom1.0/UpdatePassword?repassword="+repassword+"&newpassword="+newpassword+"&renewpassword="+renewpassword;
+			
+			xmlhttp.open("Get", url, true);
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.readyState == 4) {
+					if(xmlhttp.status == 200) {
+						//alert(typeof(xmlhttp.responseText));
+						if(xmlhttp.responseText==="1") {
+//alert(xmlhttp.responseText);
+							alert("修改成功！");
+							window.location.href = "/HealthyRoom1.0/pages/action.jsp";
+						} else {
+							alert("修改失败！");
+						}
+					} else {
+						alert(xmlhttp.status);
+					}
+				} 
+			};
+			xmlhttp.send(null);
+		}
+}
+	
+	
 	function changePhoto() {
 		$("#changeModal").modal('show');
 	}
@@ -328,7 +406,7 @@
 		$(document).ready(function() {
 			$("#logindialogspan").load("<%=base %>/pages/action_include/logindialog.jsp");
 			$("#accomplishUserInfo").load("<%=base %>/pages/action_include/accomplishUserInfo.jsp");
-			$("#alterPassword").load("<%=base %>/pages/action_include/alterpassword.jsp");
+			
 			$("#uploadPicture").load("<%=base %>/pages/healthyforum/userUploadPicture.jsp");
 			$("#myHealthyPlan").load("<%=base %>/pages/myHealthyPlan.html");
 			$('#myTab a').tab('show')

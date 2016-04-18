@@ -67,10 +67,10 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="<%=base %>/index.jsp">首页</a></li>
+						<li><a href="<%=base %>/index.jsp">首页</a></li>
 						<li><a class="text-primary" href="#">关于我们</a></li>
 						<li><a class="text-primary" href="<%=base %>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
-						<li><a class="text-primary" href="/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp">看健身房</a></li>
+						<li class="active"><a class="text-primary" href="/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp">看健身房</a></li>
 						<form class="navbar-form navbar-left" role="search">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Search">
@@ -306,7 +306,7 @@
 						if(itemId == 1)//当输入为1时，将上一页按钮禁止
 							out.print("<li class='disabled'><a>&larr;</a></li>");
 						else
-							out.print("<li><a href='/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp?itemId=" + (itemId-1) + "'>&larr;</a></li>");
+							out.print("<li><a href='/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp?itemId=" + (itemId-1) + "'>&larr;</a></li>");
 						
 						
 						for(int i=1; i <= allButtons; i++) {

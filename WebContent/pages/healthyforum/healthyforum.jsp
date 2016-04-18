@@ -65,9 +65,9 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="<%=base %>/index.jsp">首页</a></li>
+						<li><a href="<%=base %>/index.jsp">首页</a></li>
 						<li><a class="text-primary" href="#">关于我们</a></li>
-						<li><a class="text-primary" href="<%=base %>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
+						<li class="active"><a class="text-primary" href="<%=base %>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
 						<li><a class="text-primary" href="/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp">看健身房</a></li>
 						<form class="navbar-form navbar-left" role="search">
 							<div class="form-group">
@@ -136,8 +136,8 @@
 					<div style="width: 80%;height: 30%;margin: 0 auto;margin-bottom: 20%;">
 
 						<div style="width: 75%; height: 75%;margin: 0 auto; margin-bottom: 10px;">
-							<img class="img-circle" id="userpicture" style="width: 100%; height: 100%;" alt="" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=userName %>.jpg" />
-						</div>
+        			<img class="img-circle" style="width: 100%; height: 100%;" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=userName %>.jpg" />
+        		</div>
 						<div class="form-group" style="width: 100%;height: 40%;">
 							<div style="width: 100%;height: 100%;text-align: center;">
 								<button type="button" class="btn btn-primary" id="changePicture" onclick="changePhoto()">更换头像</button>
@@ -152,9 +152,8 @@
 							<div class="btn-group-vertical" role="group" aria-label="...">
 								<ul class="nav" role="tablist">
 								  <li role="presentation" class="active"><a href="/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
-									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">完善信息</a></li>
-									<li role="presentation"><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的帖子</a></li>
-									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改资料</a></li>
+								  <li role="presentation"><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的帖子</a></li>
+									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改信息</a></li>
 									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改密码</a></li>
 							      	<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">制定健身计划</a></li>
 							      
@@ -215,7 +214,7 @@
 				               <div class="main-left" style="float: left;">
 				                   <div class="img1" style="margin-right: 10px;height: 150px;">
 				                        <div style="height:80%;">
-				                       		<img class="img-circle" src="04.jpg" alt="" style="width:120px;height: 100%;">
+				                       		<img class="img-circle" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=username %>.jpg" alt="" style="width:90px;height: 80%;">
 				                       </div>
 				                       <div style="height:18%;margin-top: 1%;">
 				                       		<span style="float:left;margin-left:10px;" class="floorhost">楼主：<%=username %></span>

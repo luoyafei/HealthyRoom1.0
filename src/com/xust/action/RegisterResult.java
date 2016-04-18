@@ -65,6 +65,7 @@ public class RegisterResult extends HttpServlet {
 				User u = new User();
 				u.setUsername(username);
 				u.setPassword(password);
+				u.setUserId(UserManager.getInstance().getUserId(username));
 				session.setAttribute("userInfo", u);
 				session.setAttribute("role", Integer.parseInt(role));
 				response.sendRedirect("/HealthyRoom1.0/pages/action.jsp");

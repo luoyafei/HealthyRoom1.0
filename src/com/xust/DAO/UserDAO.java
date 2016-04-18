@@ -33,4 +33,8 @@ public interface UserDAO {
 	public String getUserPhoto(int userId);//通过userId获取用户的头像！
 	public int getAllHealthyNum();//获取所有的健身房数目
 	public ArrayList<PublishHealthyRoom> getCurrentPubHeaRoom(int itemId);//获取分页健身房
+	public int getUserId(String username);
+	public UserDetailInfo getUserDetailInfo(int userId);
+	public String updateUserPassword(int userId, String repassword, String newpassword);//更改用户的密码！
+	public boolean deleteGym(int userId);
 }

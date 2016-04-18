@@ -62,6 +62,68 @@ public class UserMysqlDAO implements UserDAO {
 	}
 
 	@Override
+	public UserDetailInfo getUserDetailInfo(int userId) {
+		// TODO Auto-generated method stub
+		UserDetailInfo udi = new UserDetailInfo();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from userdetailinfo where userId = ?";
+		
+		/*
+		 *  userBodyId    | int(11)           | NO   | PRI | NULL             | auto_increment |
+		| userId        | int(11)           | YES  | UNI | NULL             |                |
+		| userPhoto     | varchar(255)      | YES  |     | user_default.jpg |                |
+		| userIntroduce | varchar(255)      | YES  |     | NULL             |                |
+		| userGender    | enum('ÄÐ','Å®')   | YES  |     | NULL             |                |
+		| userHeight    | int(11)           | YES  |     | NULL             |                |
+		| userWeight    | int(11)           | YES  |     | NULL             |                |
+		| userBWH       | varchar(11)       | YES  |     | NULL             |                |
+		| userAge       | int(11)           | YES  |     | NULL             |                |
+		| userBirthday  | date              | YES  |     | NULL             |                |
+		| userTel       | int(11)           | YES  |     | NULL             |                |
+		| userAddress   | varchar(255)      | YES  |     | NULL             |                |
+		| roleId        | int(11)           |
+		 * 
+		 * */
+		conn = JDBCUtil.getConnection();
+		pstmt = JDBCUtil.preparedStatement(conn, sql);
+		
+		try {
+			pstmt.setInt(1, userId);
+			rs = pstmt.executeQuery();
+			rs.next();
+			udi.setUserBodyId(rs.getInt(1));
+			udi.setUserId(rs.getInt(2));
+			udi.setUserPhoto(rs.getString(3));
+			udi.setUserIntroduce(rs.getString(4));
+			udi.setUserGender(rs.getString(5));
+			udi.setUserHeight(rs.getInt(6));
+			udi.setUserWeight(rs.getInt(7));
+			udi.setUserBWH(rs.getString(8));
+			udi.setUserAge(rs.getInt(9));
+			udi.setUserBirthday(rs.getDate(10));
+			udi.setUserTel(rs.getInt(11));
+			udi.setUserAddress(rs.getString(12));
+			udi.setRoleId(rs.getInt(13));
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(pstmt != null)
+				JDBCUtil.closedPstmt(pstmt);
+			if(rs != null)
+				JDBCUtil.closedRs(rs);
+		}
+	
+	
+		return udi;
+	}
+
+	@Override
 	public boolean checkUserForAJAX(String username) {
 		// TODO Auto-generated method stub
 		
@@ -239,6 +301,31 @@ public class UserMysqlDAO implements UserDAO {
 				JDBCUtil.closedPstmt(pstmt);
 		}
 		
+		return flag;
+	}
+
+	@Override
+	public boolean deleteGym(int userId) {
+		// TODO Auto-generated method stub
+		boolean flag = true;
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "delete from publishhealthyroom where businessId = ?";
+		PreparedStatement pstmt = JDBCUtil.preparedStatement(conn, sql);
+//System.out.println(sql);
+		try {
+			pstmt.setInt(1, userId);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			e.printStackTrace();
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(pstmt != null)
+				JDBCUtil.closedPstmt(pstmt);
+		}
 		return flag;
 	}
 
@@ -801,6 +888,8 @@ public class UserMysqlDAO implements UserDAO {
 		System.out.println(new UserMysqlDAO().getUserName(29));
 	}*/
 	
+	
+	
 	@Override
 	public String getUserName(int userId) {
 		// TODO Auto-generated method stub
@@ -828,9 +917,41 @@ public class UserMysqlDAO implements UserDAO {
 				JDBCUtil.closedPstmt(pstmt);
 			if(rs != null)
 				JDBCUtil.closedRs(rs);
+			
+//System.out.println(sql + ":" + username);
 		}
 		return username;
 		
+	}
+
+	@Override
+	public int getUserId(String username) {
+		// TODO Auto-generated method stub
+		int userId = -1;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "select userId from user where username = ?";
+		ResultSet rs = null;
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = JDBCUtil.preparedStatement(conn, sql);
+			pstmt.setString(1, username);
+			rs = pstmt.executeQuery();
+			rs.next();
+			userId = rs.getInt(1);
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(pstmt != null)
+				JDBCUtil.closedPstmt(pstmt);
+			if(rs != null)
+				JDBCUtil.closedRs(rs);
+		}
+		return userId;
 	}
 
 	@Override
@@ -985,5 +1106,65 @@ public class UserMysqlDAO implements UserDAO {
 				JDBCUtil.closedRs(rs);
 		}
 		return themes; 
+	}
+	
+	private boolean isturePassword(int userId, String repassword) {
+		boolean flag = false;
+		
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "select password from user where userId = ?";
+		PreparedStatement pstmt = JDBCUtil.preparedStatement(conn, sql);
+		ResultSet rs = null;
+		try {
+			pstmt.setInt(1, userId);
+			rs = pstmt.executeQuery();
+			rs.next();
+			if(rs.getString(1).equals(repassword)) {
+				flag = true;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			flag = false;
+		} catch(Exception e) {
+			e.printStackTrace();
+			flag =false;
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(rs != null)
+				JDBCUtil.closedRs(rs);
+			if(pstmt != null)
+				JDBCUtil.closedPstmt(pstmt);
+		}
+		return flag;
+	}
+
+	@Override
+	public String updateUserPassword(int userId, String repassword, String newpassword) {
+		// TODO Auto-generated method stub
+		
+		String flag = null;
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "update user set password = ? where userId = ?";
+		PreparedStatement pstmt = JDBCUtil.preparedStatement(conn, sql);
+		try {
+			if(isturePassword(userId, repassword)) {
+				pstmt.setString(1, newpassword);
+				pstmt.setInt(2, userId);
+				pstmt.executeUpdate();
+				flag = newpassword;
+			}
+			
+		} catch (NumberFormatException | SQLException e) {
+			e.printStackTrace();
+			flag = null;
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(pstmt != null)
+				JDBCUtil.closedPstmt(pstmt);
+		}
+//System.out.println("dao newpassword:" + newpassword);
+		return flag;
 	}
 }

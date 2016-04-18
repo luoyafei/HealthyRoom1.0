@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.xust.DAO.UserManager;
-import com.xust.bean.PublishHealthyRoom;
 import com.xust.bean.User;
 
 /**
@@ -45,7 +44,7 @@ public class DealBusinessPublishGymInfo extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html");
+		//response.setContentType("text/html");
 		
 		String gymName = request.getParameter("gymName");
 		String gymAddr = request.getParameter("gymAddr");
@@ -68,7 +67,6 @@ public class DealBusinessPublishGymInfo extends HttpServlet {
 		
 		String[] photoUrls = new String[3];//此为要存入数据库的图片的地址数组
 		
-//System.out.println(inputs.length + "input");
 		OutputStream[] outputs = new OutputStream[3];
 		for(int j = 0; j < inputs.length; j++) {
 			String fileurl = "G:\\Eclipse\\Project\\EclipseEEProject\\HealthyRoom1.0\\WebContent\\business_healthyroomUp\\" + gymName + j + ".jpg";
@@ -78,7 +76,6 @@ public class DealBusinessPublishGymInfo extends HttpServlet {
 			outputs[j] = new FileOutputStream(f);
 		}
 //System.out.println(outputs.length + "output");		
-		PrintWriter out = response.getWriter();
 //out.println(gymName + ","+gymAddr + "," + gymPrice + "," + gymTel + "," + gymIntroduce);
 		
 		byte[] b0 = new byte[1024];
@@ -106,32 +103,30 @@ public class DealBusinessPublishGymInfo extends HttpServlet {
 		}
 		//out.println("==3");
 		
-		for(int i1 = 0; i1 < 0; i1++) {
+		for(int i1 = 0; i1 < 3; i1++) {
 			inputs[i1].close();
 			outputs[i1].flush();
 			outputs[i1].close();
 		}
 		
-		out.flush();
-		out.close();
-		
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(true);
 		User u = (User)session.getAttribute("userInfo");
 		int businessId = u.getUserId();
 		
 		boolean insertResult = UserManager.getInstance().SaveBusinessPublishHealthyRoomInfo(businessId, gymName, gymAddr, gymPrice, gymTel, gymIntroduce, photoUrls[0], photoUrls[1], photoUrls[2]);
+		//response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp");
+		
 		if(insertResult) {
-			System.out.println("商家发布健身房信息成功！");
+System.out.println("商家发布健身房信息成功！");
 			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp");
+			//response.sendRedirect("/HealthyRoom1.0/index.jsp");
 			//this.getServletConfig().getServletContext().getRequestDispatcher("/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp").forward(request, response);
-			//return;
+			return;
 		} else {
-			System.out.println("商家发布健身房信息失败！");
+System.out.println("商家发布健身房信息失败！");
 			response.sendRedirect("/HealthyRoom1.0/pages/business_authority/business_pulish_healthyroom_page.jsp");
-			//return;
+			return;
 		}
-		
-		
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

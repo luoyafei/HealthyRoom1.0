@@ -27,7 +27,17 @@
 
 <title>荟萃论坛</title>
 
-<!-- Bootstrap core CSS -->
+	<!-- Bootstrap core JavaScript
+	    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="../../assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
+	<script src="../../assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
+	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+	<script
+		src="../../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script
+		src="../../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 <!-- Bootstrap core CSS -->
 		<link href="../../assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 
@@ -163,12 +173,10 @@
 						<div class="btn-group-vertical" role="group" aria-label="...">
 							<ul class="nav" role="tablist">
 								<li role="presentation" class="active"><a href="/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
-								<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">完善信息</a></li>
-								<li role="presentation"><a href="#myHealth">我的健身</a></li>
-								<li role="presentation"><a href="#myFocus">我的关注</a></li>
-								<li role="presentation"><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的帖子</a></li>
-								<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改资料</a></li>
-								<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改密码</a></li>
+								  <li role="presentation"><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的帖子</a></li>
+									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改信息</a></li>
+									<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">修改密码</a></li>
+							      	<li role="presentation"><a href="/HealthyRoom1.0/pages/action.jsp">制定健身计划</a></li>
 							      <%
 								 //String roleIdStr = (String) session.getAttribute("role");
 							      int roleIdStr = (Integer)session.getAttribute("role");
@@ -341,7 +349,7 @@
 
 										<div class="tab-content-1"
 											style="width: 80%; height: 780px; margin: 0 auto; background-color: white;">
-											<form class="form-horizontal" role="form" style="margin-left: 0px;">
+											<div class="form-horizontal" role="form" style="margin-left: 0px;">
 
 												<div style="border-bottom: dashed #A9A9A9 1px;">
 													<div class="form-group"
@@ -390,22 +398,6 @@
 													</div>
 												</div>
 
-
-												<script>
-												//此处是使用KE在线编辑器
-												KE.show({
-													id: 'healthyRoomIntroduceAlter',
-													resizeMode: 1,
-													allowPreviewEmoticons: false,
-													allowUpload: false,
-													items: [
-														'fontname', 'fontsize', '|', 'textcolor', 'bgcolor', 'bold', 'italic', 'underline',
-														'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-														'insertunorderedlist', '|', 'emoticons', 'image', 'link'
-													]
-												});
-											</script>
-
 												<div style="border-bottom: dashed #A9A9A9 1px;">
 													<div class="form-group" style="padding-top: 15px;">
 														<label for="create-project-name1"
@@ -434,11 +426,53 @@
 												<div style="margin: 50px auto;">
 														<div class="form-group"
 															style="margin: 0 auto; text-align: center;">
-															<button type="submit" class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;">点击进行修改</button>
+															
+															<%=isPublish?"<button id='delete_pub' class='btn btn-default' style='border: solid #A9A9A9 2px; border-radius: 10px;color: black;'>点击删除</button>":"" %>
 														</div>
 												</div>
-
-											</form>
+												<script>
+													$(document).ready(function() {
+														
+														$("#delete_pub").bind('click', function() {
+															$('#delete_dialog').modal('show');	
+														});
+														$("#sure_delete").bind('click', function() {
+															
+															$.get("/HealthyRoom1.0/DeletePublishGym?t="+Math.random(), {},function(data, textStatus) {
+																var status = data.status;
+																//alert(status);
+																if(status == "1") {
+																	alert("删除成功！");
+																	$('#delete_dialog').modal('hide');
+																	window.location.href="/HealthyRoom1.0/pages/business_authority/business_pulish_healthyroom_page.jsp";
+																} else {
+																	alert("删除失败！");	
+																	$('#delete_dialog').modal('hide');	
+																}
+															},"json");
+														});
+													});
+												</script>
+													
+													<div class="modal fade  bs-example-modal-sm" id="delete_dialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+													  <div class="modal-dialog modal-sm">
+													    <div class="modal-content">
+													      <div class="modal-header">
+													        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+													        <h4 class="modal-title" id="myModalLabel">提示！</h4>
+													      </div>
+													      <div class="modal-body alert alert-warning" role="alert">
+													        	您确定现在想要删除您发布的该健身房信息吗？
+													      </div>
+													      <div class="modal-footer">
+													        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+													        <button type="button" id="sure_delete" class="btn btn-danger">确定</button>
+													      </div>
+													    </div>
+													  </div>
+													</div>
+													
+											</div>
 										</div>
 									</div>
 								</div>
@@ -468,18 +502,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- Bootstrap core JavaScript
-	    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="../../assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
-	<script src="../../assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
-	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-	<script
-		src="../../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script
-		src="../../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 	<div id="logindialogspan"></div>
 	<div id="uploadPicture"></div>
 	<script>
@@ -509,7 +531,7 @@
 	    	
 			$("#logindialogspan").load("<%=base%>/pages/action_include/logindialog.jsp");
 			$("#accomplishUserInfo").load("<%=base%>/pages/action_include/accomplishUserInfo.jsp");
-			$("#spanalterPassword").load("<%=base%>/pages/action_include/alterpassword.jsp");
+			$("#spanalterPassword").load("<%=base%>/pages/action_include/alterpassword.html");
 			$("#uploadPicture").load("<%=base%>/pages/healthyforum/userUploadPicture.jsp");
 		});
 							

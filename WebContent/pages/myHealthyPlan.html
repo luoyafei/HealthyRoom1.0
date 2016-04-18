@@ -1,5 +1,5 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="">
-          <h1 class="page-header" style="color: snow;font-family: '微软雅黑';">請输入您的身体数据，方便我们对您进行全方位制定健身计划！</h1>
+          <h1 class="page-header" style="color: black;font-family: '微软雅黑';">請输入您的个人数据，方便我们对您进行全方位制定健身计划！</h1>
 			<div style="width: 100%;height: 100%;">
 				<div class="input-group input-group-lg">
 				  <span class="input-group-addon">性&nbsp;&nbsp;&nbsp;别&nbsp;&nbsp;&nbsp;</span>
@@ -19,17 +19,17 @@
 				</div>
 				
 				<div class="input-group input-group-lg">
-				  <span class="input-group-addon">三围(上)</span>
+				  <span class="input-group-addon">胸&nbsp;&nbsp;&nbsp;围&nbsp;&nbsp;&nbsp;</span>
 				  <input type="text" id="BWH_B" class="form-control" placeholder="/cm">
 				</div>
 				
 				<div class="input-group input-group-lg">
-				  <span class="input-group-addon">三围(中)</span>
+				  <span class="input-group-addon">腰&nbsp;&nbsp;&nbsp;围&nbsp;&nbsp;&nbsp;</span>
 				  <input type="text" id="BWH_W" class="form-control" placeholder="/cm">
 				</div>
 				
 				<div class="input-group input-group-lg">
-				  <span class="input-group-addon">三围(下)</span>
+				  <span class="input-group-addon">臀&nbsp;&nbsp;&nbsp;围&nbsp;&nbsp;&nbsp;</span>
 				  <input type="text" id="BWH_H" class="form-control" placeholder="/cm">
 				</div>
 				
@@ -57,50 +57,53 @@
 							//alert(data.status);
 							var status = data.status;
 							var sex = data.sex;
-							alert(status);
+							//alert(status);
 							if(sex == 1) {
 								//alert("你好先生");
 								$("#referencesImg").attr("src", "/HealthyRoom1.0/assets/img/2.jpg");
 								$("#dialogBodyTitle").text("男性标准身高体重对照表");
-								switch(status) {
-								case  -4:
+								//alert(typeof status);
+							switch(status) {
+								case  "-4":
 									$("#suggestInfo").text("尊敬的男士，您的身材正处于严重瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃韭菜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_thin.html");
 									break;
-								case -3:
+								case "-3":
 									$("#suggestInfo").text("尊敬的男士，您的身材正处于中度瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃韭菜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_thin.html");
 									break;
-								case -2:
+								case "-2":
 									$("#suggestInfo").text("尊敬的男士，您的身材正处于轻度瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃韭菜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_thin.html");
 　									break;
-								case -1:
+								case "-1":
 									$("#suggestInfo").text("尊敬的男士，您的身材正处于瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃韭菜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_heal.html");
 									break;
-								case  0:
-									$("#suggestInfo").text("尊敬的男士，您的身材很健康，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("建议多吃韭菜");
+								case "0":
+									$("#suggestInfo").text("尊敬的男士，您的身材很健康，希望您继续保证身材哦，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_heal.html");
 									break;
-								case 1:
+								case "1":
 									$("#suggestInfo").text("尊敬的男士，您的身材正处于超重的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃韭菜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_heal.html");
 									break;
-								case 2:
+								case "2":
 									$("#suggestInfo").text("尊敬的男士，您的身材正处于轻度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃韭菜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_fat.html");
 									break;
-								case 3:
+								case "3":
 									$("#suggestInfo").text("尊敬的男士，您的身材正处于中度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃韭菜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_fat.html");
 									break;
-								case 4:
+								case "4":
 									$("#suggestInfo").text("尊敬的男士，您的身材正处于重度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃韭菜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_fat.html");
 									break;
-								default:
-									break
+								case "999":
+									$("#suggestInfo").text("亲！请不要乱输入数据哦！否则会反弹的哦！");
+									$("#detailPlan").text("请多吃韭菜+大蒜！");
+									break;
 								}
 								
 							} else if(sex == 0) {
@@ -108,54 +111,48 @@
 								$("#referencesImg").attr("src", "/HealthyRoom1.0/assets/img/1.jpg");
 								$("#dialogBodyTitle").text("女性标准身高体重对照表");
 								switch(status) {
-								case  -4:
+								case "-4":
 									$("#suggestInfo").text("尊敬的女士，您的身材正处于严重瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃黄瓜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_thin.html");
 									break;
-								case -3:
+								case "-3":
 									$("#suggestInfo").text("尊敬的女士，您的身材正处于中度瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃黄瓜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_thin.html");
 									break;
-								case -2:
+								case "-2":
 									$("#suggestInfo").text("尊敬的女士，您的身材正处于轻度瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃黄瓜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_thin.html");
 　									break;
-								case -1:
+								case "-1":
 									$("#suggestInfo").text("尊敬的女士，您的身材正处于瘦弱的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃黄瓜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_heal.html");
 									break;
-									
-								case  0:
-									$("#suggestInfo").text("尊敬的女士，您的身材很健康，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("建议多吃黄瓜");
+								case "0":
+									$("#suggestInfo").text("尊敬的女士，您的身材很健康，您可以继续保持你的身材，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_heal.html");
 									break;
-								case 1:
+								case "1":
 									$("#suggestInfo").text("尊敬的女士，您的身材正处于超重的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃黄瓜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_heal.html");
 									break;
-								case 2:
+								case "2":
 									$("#suggestInfo").text("尊敬的女士，您的身材正处于轻度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃黄瓜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_fat.html");
 									break;
-								case 3:
+								case "3":
 									$("#suggestInfo").text("尊敬的女士，您的身材正处于中度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃黄瓜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_fat.html");
 									break;
-								case 4:
+								case "4":
 									$("#suggestInfo").text("尊敬的女士，您的身材正处于重度肥胖的地步，为了不影响您的未来生活，建议您遵循我们对您量身规划的健身条目，进行安全合理的健身！");
-									$("#detailPlan").text("多吃黄瓜");
+									$("#detailPlan").load("/HealthyRoom1.0/pages/user_healthy_suggest/user_healthy_suggest_fat.html");
 									break;
-							/* 	case 999:
+							 	case "999":
 									$("#suggestInfo").text("尊敬的女士，你是煞笔吗？");
 									$("#detailPlan").text("请多吃黄瓜");
-									break; */
-								default:
 									break;
 								}
-								
 							}
-								
-							
 						}, "json");
 					}
 					
@@ -179,7 +176,7 @@
 												</div>
 												<div class="alert alert-danger" role="alert">
 													<h3>您现在的身体状况：</h3>
-													<h4>
+													<h4 id="test">
 														<span id="suggestInfo"></span>
 													</h4>
 												</div>

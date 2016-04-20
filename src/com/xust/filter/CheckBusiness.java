@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class CheckBusiness
  */
-@WebFilter(filterName="mustIsBusiness",urlPatterns="/HealthyRoom1.0/pages/business_authority/business_pulish_healthyroom_page.jsp")
+@WebFilter(filterName="mustIsBusiness",urlPatterns="/HealthyRoom1.0/pages/business_authority/*")
 public class CheckBusiness implements Filter {
 
     /**

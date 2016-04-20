@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class CheckUser
  */
-@WebFilter(filterName="filterNotUser",urlPatterns={"/pages/healthyforum/healthyforum.jsp","/pages/healthyforum/replyThemePage.jsp","/pages/healthyforum/userUploadPicture.jsp","/pages/action.jsp","/HealthyRoom1.0/DealBusinessPublishGymInfo"})
+@WebFilter(filterName="filterNotUser",urlPatterns={"/pages/healthyforum/*","/pages/action.jsp","/pages/action_include/*","/HealthyRoom1.0/DealBusinessPublishGymInfo","/userassets/*"})
 public class CheckUser implements Filter {
 
     /**

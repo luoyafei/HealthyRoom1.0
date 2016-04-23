@@ -80,7 +80,7 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="<%=base%>/index.jsp">首页</a></li>
-					<li><a class="text-primary" href="#">关于我们</a></li>
+					<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/about_our.jsp">关于我们</a></li>
 					<li><a class="text-primary"
 						href="<%=base%>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
 					<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp">看健身房</a></li>

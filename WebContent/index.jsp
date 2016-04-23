@@ -49,7 +49,7 @@
 <!-- NAVBAR
 ================================================== -->
 
-<body>
+<body style="padding-bottom: 0px;">
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -67,7 +67,7 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/HealthyRoom1.0/index.jsp">首页</a></li>
-					<li><a class="text-primary" href="#">关于我们</a></li>
+					<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/about_our.jsp">关于我们</a></li>
 					<li><a class="text-primary" href="<%=base %>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
 					<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp">看健身房</a></li>
 					<form class="navbar-form navbar-left" role="search">
@@ -280,46 +280,40 @@
 	<div class="container marketing">
 		<!-- Three columns of text below the carousel -->
 		<div class="thumbtitle">
-			<h1>健身房展示</h1>
+			<h1>健身技巧快速学习</h1>
 		</div>
 
 		<div class="row">
 			<div class="col-lg-4">
-				<img class="img-thumbnail" src="assets/img/img0.jpg"
-					alt="Generic placeholder image" width="320" height="200">
-				<h2>Heading</h2>
-				<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis
-					euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
-					Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-					Praesent commodo cursus magna.</p>
+				<a href="/HealthyRoom1.0/pages/public_visit/showDetail001.jsp">
+					<img class="img-thumbnail" src="assets/img/jianshen/a14e5abegw1exw8h22yxqg20c80c8kjl.gif"
+					alt="Generic placeholder image" style="width: 320px;height: 220px;">
+				</a>
+				<h2>收腹练习图文教程</h2>
 				<p>
-					<a class="btn btn-default" href="#" role="button">查看详细 &raquo;</a>
+					<a class="btn btn-default" href="/HealthyRoom1.0/pages/public_visit/showDetail001.jsp" role="button">查看详细 &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
-				<img class="img-thumbnail" src="assets/img/img0.jpg"
-					alt="Generic placeholder image" width="320" height="200">
-				<h2>Heading</h2>
-				<p>Duis mollis, est non commodo luctus, nisi erat porttitor
-					ligula, eget lacinia odio sem nec elit. Cras mattis consectetur
-					purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo,
-					tortor mauris condimentum nibh.</p>
+				<a href="/HealthyRoom1.0/pages/public_visit/showDetail002.jsp">
+					<img class="img-thumbnail" src="assets/img/jianshen/a14e5abegw1exqgot5pnog208c05kwjq.gif"
+						alt="Generic placeholder image" style="width: 320px;height: 220px;">
+				</a>
+				<h2>马甲线详细实训</h2>
 				<p>
-					<a class="btn btn-default" href="#" role="button">查看详细 &raquo;</a>
+					<a class="btn btn-default" href="/HealthyRoom1.0/pages/public_visit/showDetail002.jsp" role="button">查看详细 &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
-				<img class="img-thumbnail" src="assets/img/img0.jpg"
-					alt="Generic placeholder image" width="320" height="200">
-				<h2>Heading</h2>
-				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-					egestas eget quam. Vestibulum id ligula porta felis euismod semper.
-					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-					nibh, ut fermentum massa justo sit amet risus.</p>
+				<a href="/HealthyRoom1.0/pages/public_visit/showDetail003.jsp">
+					<img class="img-thumbnail" src="assets/img/jianshen/fa500ff3d7ca7bcb2ccf63fdbf096b63f724a80e.jpg"
+						alt="Generic placeholder image" style="width: 320px;height: 220px;">
+				</a>
+				<h2>图文剖析身体健康</h2>
 				<p>
-					<a class="btn btn-default" href="#" role="button">查看详细 &raquo;</a>
+					<a class="btn btn-default" href="/HealthyRoom1.0/pages/public_visit/showDetail003.jsp" role="button">查看详细 &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
@@ -329,26 +323,29 @@
 
 	<div class="jumbotitle">
 		<div class="container">
-			<p class="left">&nbsp;&nbsp;&nbsp;&nbsp;压力是躲不掉的。一个企业家要耐得住寂寞，耐得住诱惑，还要耐得住压力，耐得住冤枉，外练一层皮，内练一口气，这很重要。武林高手比的是经历了多少磨难，而不是取得过多少成功。</p>
-			<p class="right">——马云&nbsp;&nbsp;&nbsp;&nbsp;</p>
+			<p class="left">
+			&nbsp;&nbsp;&nbsp;&nbsp;“我过去的兴趣一直在如何保持完美的身体比例上。有一次，15岁的我脱光衣服站在镜子前看自己。看着镜中裸体的自己，我发现要达到完美的身体比例，我得有一对20英寸粗的臂膀，才配得上身体的其它地方。”
+			<span class="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——阿诺德·施瓦辛格</span></p>
+			
 		</div>
 	</div>
 
-	</div>
 	<!-- /.container -->
 
 	<hr class="featurette-divider">
 
 	<!-- FOOTER -->
-	<div class="container">
-		<footer>
-			<p class="pull-right">
-				<a href="#">Back to top</a>
-			</p>
-			<p>
-				&copy; 2015 luo &middot; <a href="#">XIKEDA</a> &middot;
-			</p>
-		</footer>
+	<div style="width:100%; background-color: #333333;">
+		<div class="container">
+			<footer>
+				<p class="pull-right">
+					<a href="#">Back to top</a>
+				</p>
+				<p>
+					<span style="color:white;">&copy; 2015 cuiluozhou &middot;</span> <a href="#">XIKEDA</a> &middot;
+				</p>
+			</footer>
+		</div>
 	</div>
 
 	<!-- 点击登陆出现的登陆框 -->

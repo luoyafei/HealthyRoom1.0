@@ -1,0 +1,967 @@
+<?
+	include_once("../../model/User.php");
+
+	session_start();
+
+	$userid = $_SESSION['userid'];
+	$user = new User($userid);
+
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="../../favicon.ico">
+		<title>
+			个人中心
+		</title>
+		
+		
+		
+		<!-- Bootstrap core JavaScript
+			================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="../../assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
+		<script src="../../assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+		<!-- Bootstrap core CSS -->
+		<link href="../../assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+		<!--[if lt IE 9]><script src="./js/ie8-responsive-file-warning.js"></script><![endif]-->
+		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
+		<script charset="utf-8" src="../../assets/ke/kindeditor.js"></script>
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="./js/html5shiv.min.js"></script>
+		<script src="./js/respond.min.js"></script>
+		<![endif]-->
+		<!-- Custom styles for this template -->
+		<link href="../../assets/bootstrap-3.3.5/docs/examples/carousel/carousel.css" rel="stylesheet">
+		<link rel="shortcut icon" href="../../assets/img/icon1.jpg">
+		<style>
+			body {
+				font-family: "微软雅黑";
+			}
+			
+			li a {
+				color: snow;
+			}
+			
+			.row .img {
+				margin-right: 5px;
+			}
+			
+			.nav .active a {
+				border-bottom: solid #398BE5 3px;
+				color: #398BE5;
+				font-weight: bold;
+			}
+			
+			#navbar ul a:hover {
+				border-bottom: solid #398BE5 3px;
+				color: #398BE5;
+				background-color: transparent;
+			}
+			
+			#choicelabel a {
+				color: black;
+			}
+			
+			#choicelabel .active {
+				color: #398BE5;
+			}
+			
+			#inputSearch {
+				border-radius: 20px;
+				background-color: #A9A9A9;
+			}
+			
+			.col-lg-3 {
+				margin: 0 0;
+				padding: 0 0;
+			}
+			
+			.col-lg-4 {
+				margin: 0 0;
+				padding: 0 0;
+			}
+			
+			.marketing .col-lg-4 {
+				margin-bottom: 0px;
+			}
+		</style>
+		<script>
+			function demo() {
+				var h = $(window).height() / 2;
+				if ($(window).scrollTop() > h) {
+					$("#navbar").hide();
+				} else {
+					$("#navbar").show();
+				}
+			}
+		</script>
+	</head>
+	<!-- NAVBAR
+	================================================== -->
+
+	<body onscroll="demo()" style="background-color: #F5F5F5;">
+		<nav class="navbar navbar-fixed-top" id="navbar">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar">
+						</span>
+						<span class="icon-bar">
+						</span>
+						<span class="icon-bar">
+						</span>
+					</button>
+					<img class="navbar-brand" src="../../assets/img/logo2.png" alt="logo.jpg" style="width: 200px;height: 90px;padding-top: 0px;margin-top: 0px;">
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<div class="navbar-form pull-right">
+						<ul class="nav navbar-nav">
+							<li class="">
+								<a href="../../index.php">
+									首页
+								</a>
+							</li>
+							<li>
+								<a class="a-item" href="../project/project_list.php">
+									项目
+								</a>
+							</li>
+							<li>
+								<a class="a-item" href="../other_entity_list/money_list.php">
+									资金
+								</a>
+							</li>
+							<li>
+								<a class="a-item" href="../other_entity_list/technology_list.php">
+									技术
+								</a>
+							</li>
+							<li>
+								<a class="a-item" href="../other_entity_list/business_list.php">
+									运营
+								</a>
+							</li>
+							<li>
+								<a class="a-item" href="../other_entity_list/market_list.php">
+									市场
+								</a>
+							</li>
+							<form class="navbar-form navbar-left" role="search">
+								<div class="form-group" style="margin-top: 8px;">
+									<a type="submit">
+										<span class="glyphicon glyphicon-search">
+										</span>
+									</a>
+								</div>
+								<input type="text" class="form-control input-sm" id="inputSearch" placeholder="" style="margin-top: 5px;height: 20px; padding: 0px 10px;" />
+							</form>
+							<li class="active">
+								<a class="dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-user" aria-hidden="true">
+									</span>
+								</a>
+								<ul class="dropdown-menu" role="menu" id="user-menu-cont">
+									<?php if(!isset($_SESSION['userid'])){ ?>
+									<li><a onclick="func()">登陆</a></li>
+									<li><a href="register.php">注册</a></li>
+									<? } else {?>
+									   <li><a>你好！<?echo $user->user_name;?></a></li>
+									   <li><a href="personal_center.php">个人资料</a></li>									   
+									   <li><a href="user_center.php">编辑资料</a></li>
+									   <li class="divider"></li>
+									   <li><a href="../../action/user/user_logout.php">注销</a></li>
+									<?}?>
+								</ul>
+							</li>
+							<!--<li><button class="btn btn-default" onclick="func()">登陆</button></li>
+							<li><a class="btn btn-default" href="pages/register.html">注册</a></li>-->
+						</ul>
+						<script>
+							function func() {
+								$('#myModal').modal('show');
+							}
+							/* 此为点击确认登录后，验证 模态框内的用户名和密码*/
+							function checkModalData() {
+								var username = $("#modal-email").val().trim();
+								var password = $("#modal-password").val().trim();
+								var xmlhttp = null;
+								if (username === "" || password === "") {
+									alert("请填写登录名及密码");
+									addNodeRemove();
+									addNodePswRemove();
+									$("#modal-email").focus();
+									return;
+								}
+								if (window.XMLHttpRequest) {
+									xmlhttp = new XMLHttpRequest();
+								} else if (window.XMLHttpRequest) {
+									xmlhttp = new ActiveXObject();
+								}
+								if (xmlhttp == null) {
+									alert("无法创建XMLHttpRequest对象");
+									return;
+								}
+								xmlhttp.open("GET", "CheckDataToUseAJAX?username=" + username + "&password=" + password, true);
+								xmlhttp.onreadystatechange = function() {
+									if (xmlhttp.readyState == 4) {
+										if (xmlhttp.status == 200) {
+											if (xmlhttp.responseText) {
+												addNodePswOk();
+												$('#myModal').modal('hide');
+												$("#login-register-bar").replaceWith("<button type=button class='btn btn-default btn-large'><a href=#><span class='glyphicon glyphicon-user' aria-hidden=true></span>&nbsp;&nbsp;用户名</a></button><button type=button class='btn btn-default' dropdown-toggle data-toggle=dropdown><span class=caret></span><span class=sr-only>Toggle Dropdown</span></button><ul class=dropdown-menu role=menu><li><a href=#>个人中心</a></li><li><a href=#>我的项目</a></li><li><a href=#>我的消息</a></li><li class=divider></li><li><a href=#>登出</a></li></ul>");
+											} else {
+												addNodePswRemove();
+												$("#modal-email").focus();
+											}
+										} else {
+											alert(xmlhttp.status);
+										}
+									}
+								}
+								xmlhttp.send(null);
+							}
+							/* 此为验证 模态框内的用户名是否存在*/
+							function checkModalEmail() {
+								var xmlhttp = null;
+								var username = $("#modal-email").val().trim();
+								if (window.XMLHttpRequest) {
+									xmlhttp = new XMLHttpRequest();
+								} else if (window.XMLHttpRequest) {
+									xmlhttp = new ActiveXObject();
+								}
+								if (xmlhttp == null) {
+									alert("无法创建XMLHttpRequest对象");
+									return;
+								}
+								xmlhttp.open("GET", "registerAJAX?username=" + username, true);
+								xmlhttp.onreadystatechange = function() {
+									if (xmlhttp.readyState == 4) {
+										if (xmlhttp.status == 200) {
+											if (xmlhttp.responseText) {
+												addNodeOk();
+											} else {
+												addNodeRemove();
+											}
+										} else {
+											alert(xmlhttp.status);
+										}
+									}
+								}
+								xmlhttp.send(null);
+							}
+							/*此函數用于模态框内提示email是否正確*/
+							function addNodeOk() {
+								$("#modal-gly-info")
+									.replaceWith(
+										"<span id='modal-gly-info' class='glyphicon glyphicon-ok'></span>");
+							}
+
+							function addNodeRemove() {
+								$("#modal-gly-info")
+									.replaceWith(
+										"<span id='modal-gly-info' class='glyphicon glyphicon-remove'></span>");
+							}
+							/*此函數用于模态框内提示password是否正確*/
+							function addNodePswOk() {
+								/* $("#modal-gly-password-info").removeClass("glyphicon-remove").addClass("glyphicon-ok"); */
+								$("#modal-gly-password-info")
+									.replaceWith(
+										"<span id='modal-gly-password-info' class='glyphicon glyphicon-ok'></span>");
+							}
+
+							function addNodePswRemove() {
+								$("#modal-gly-password-info")
+									.replaceWith(
+										"<span id='modal-gly-password-info' class='glyphicon glyphicon-remove'></span>");
+							}
+							/* 此为模态框成功登陆后做的操作 */
+							function successLogin() {
+								$('#myModal').modal('hide');
+								//$("#login-register-bar").replaceWith("<div class='btn-group navbar-form pull-right'><button type='button' class='btn btn-default btn-large'><a href='#'><span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp;&nbsp;用户名</a></button><button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'><span class='caret'></span><span class='sr-only'>Toggle Dropdown</span></button><ul class='dropdown-menu' role='menu'><li><a href='#'>个人中心</a></li><li><a href='#'>我的项目</a></li><li><a href="#'>我的消息</a></li><li class='divider'></li><li><a href='#'>登出</a></li></ul></div>");
+							}
+						</script>
+					</div>
+					<!-- Split button -->
+					<!--					<div class="btn-group navbar-form pull-right">
+					<button type="button" class="btn btn-default btn-large"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;用户名</a></button>
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+					<li><a href="#">个人中心</a></li>
+					<li><a href="#">我的项目</a></li>
+					<li><a href="#">我的消息</a></li>
+					<li class="divider"></li>
+					<li><a href="#">登出</a></li>
+					</ul>
+					</div>
+					-->
+					<!--          <?php
+					//}
+					?>-->
+					<!--</ul>-->
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+		<!-- Carousel
+		================================================== -->
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 0px;">
+			<!-- Indicators -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img class="" src="../../assets/img/content_detail/333.png" alt="">
+					<div class="container" style="padding-right: 0px;padding-left: 0px;">
+						<div class="carousel-caption">
+							<div class="logo-img" style="width: 100%;">
+								<span>
+									<img src="../../assets/img/content_detail/头像.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;">
+								</span>
+								<span>
+									<a style="font-size: 14px;text-decoration: none;">
+										<span style="display: block;">ID:姓名/昵称</span>
+								</a>
+								<!--<a style="font-size: 14px;text-decoration: none;">
+									<span style="display: block;">信用等级:4</span>
+								</a>-->
+								</span>
+								<span>
+									<img src="../../assets/img/content_detail/等级条.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;">
+								</span>
+							</div>
+							<p style="margin-bottom: 0px;font-size: 32px;">
+								<br> 个人中心
+							</p>
+							<br />
+							<br />
+							<br />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.carousel -->
+		<!-- Marketing messaging and featurettes
+		================================================== -->
+		<div class="container marketing" style="background-color: #F5F5F5; padding:50px 0px;width: 68%;">
+			<!-- Three columns of text below the carousel -->
+			<div class="thumbtitle">
+				<div class="contenttitle" style="margin-bottom: 10px;">
+					<p style="margin-bottom: 4px;">
+						WHO&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;AM
+					</p>
+					<p style="float: right;">
+						随经济全球化以及生产专业化现象的普遍，社会分工和协同合作已经成为了一种创业趋势。
+					</p>
+					<h2 style="margin-top: 0;" style="color: black;">
+						个人中心
+					</h2>
+				</div>
+			</div>
+
+			<div class="content-main" style="width: 100%;height: 1200px;background-color: white;overflow: hidden;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+				<div class="content-main-top" style="height: 27%;">
+					<div style="width: 80%;height: 100%;margin: 0 auto;border-bottom: dashed #A9A9A9 1px;">
+						<div class="main-left" style="width: 50%;height: 90%;;float: left;">
+							<img style="width: 100%;height: 100%;" src="<?echo $user->user_photo;?>" />
+						</div>
+						<div class="main-right" style="width: 50%;padding-left: 20px;float: right;">
+       
+							<div class="form-group" style="margin-top: 20px;border-bottom: dashed #A9A9A9 1px;">
+								<span for="technologyname" style="font-weight: bold;font-size: 20px;">用户昵称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span for="technologyname" style="font-size: 20px;"><?echo $user->user_name;?></span>
+							</div>
+							<div class="form-group" style="margin-top: 20px;border-bottom: dashed #A9A9A9 1px;">
+								<span for="technologytype" style="font-weight: bold;font-size: 20px;">所属地址：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span for="technologytype" style="font-size: 20px;"><?echo $user->user_province;?></span>
+							</div>
+							<div class="form-group" style="margin-top: 20px;">
+								<span for="technologyaddr" style="font-weight: bold;font-size: 20px;">用户简介：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span for="technologyaddr" style="font-size: 17px;">
+									<br />
+									<?echo $user->user_introduce;?>
+									</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				
+				<div class="content-main-mid" style="height: 8%;margin-top: 30px;border-bottom: solid #DCDCDC 1px;">
+					<div style="width: 80%;height: 100%;margin: 0 auto;">
+						<!--<div class="main-left" style="width: 50%;text-align: center;height: 100%;float: left;padding-top: 20px;">
+							<a class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;">关注ta</a>
+						</div>-->
+						<div class="main-right" style="width: 100%;text-align: center;height: 100%;float: right;padding-top: 20px;">
+							<a class="btn btn-default" onclick="connect_our_im()" style="border: solid #A9A9A9 2px; border-radius: 10px;">联系ta</a>
+							<script>
+								function connect_our_im() {
+									$('#IM_dialog_info').modal('show');
+								}
+							</script>
+						</div>
+					</div>
+				</div>
+				
+				<div class="content-main-bottoom" style="height: 65%;">
+					<!-- Nav tabs -->
+					<div class="tab-content-1" style="width: 80%;margin: 80px auto; background-color: white;">
+						<form class="form-horizontal" role="form" style="margin-left: 0px;">
+							<div class="form-group" style="margin-right: 0px;margin-left: -45px;">
+								<div style="margin-top: 23px;">
+									<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">认证情况</label>
+									<div class="col-sm-10" style="padding-top: 5px;">
+										<a class="btn btn-default" style="border: solid #398BE5 3px; border-radius: 10px;color: #398BE5;margin-right: 20px;">实名认证</a>
+										<a class="btn btn-default" style="border: solid #398BE5 3px; border-radius: 10px;color: #398BE5;margin-right: 20px;">XX认证</a>
+										<a class="btn btn-default" style="border: solid #398BE5 3px; border-radius: 10px;color: #398BE5;margin-right: 20px;">XX认证</a>
+									</div>
+								</div>
+								<hr class="featurette-divider" style="padding-bottom: 0px; margin-bottom: 0px;">
+							</div>
+							<div class="form-group" style="margin-right: 0px;margin-left: -45px;width: 100%;">
+								<div style="margin-top: 23px;width: 100%;">
+									<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">已发布项目</label>
+									<!--<div class="col-sm-10" style="padding-top: 10px;">-->
+										
+<!--			##########################项目item########################						-->	
+										
+			<div class="row" style="width: 80%;height: 100%; margin: 0 auto;float: right;">
+				<div class="col-lg-4">
+					<div class="col-lg-4-technologyservice1">
+						<img class="img-thumbnail" src="../../assets/img/indexpage/demo2.jpg" alt="Generic placeholder image" style="width: 100%;height: 200px;">
+							
+						<!--###########################此为鼠标移入后的显示###################################-->
+						<div class="col-lg-4-technologyservice-main1" style="visibility: hidden; position:absolute;width:100%;height:200px;color: white; background:url(../../assets/img/indexpage/半透明.png);z-indent:2;left:0;top:0;">
+	
+							<div style="width: 100%;height: 100%;overflow: hidden;float:left;">
+								<div class="projectcatagory-brief" style="font-size: 12px;width: 100%;height: 100%;font-family: STHeiti;">
+									<div class="projectcatagory-brief-content">
+										<br /><br /><br /><br /><br /><br />
+										<h4>
+										项目名名称
+										</h4>
+									</div>
+								</div>
+	
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<!-- /.col-lg-4 -->
+				<div class="col-lg-4">
+					<div class="col-lg-4-technologyservice2">
+						<img class="img-thumbnail" src="../../assets/img/indexpage/demo3.jpg" alt="Generic placeholder image" style="width: 100%; height: 200px;">
+							
+							<!--###########################此为鼠标移入后的显示###################################-->
+						<div class="col-lg-4-technologyservice-main2" style="visibility: hidden; position:absolute;width:100%;height:200px;color: white; background:url(../../assets/img/indexpage/半透明.png);z-indent:2;left:0;top:0;">
+	
+							<div style="width: 100%;height: 100%;overflow: hidden;float:left;">
+								<div class="projectcatagory-brief" style="font-size: 12px;width: 100%;height: 100%;font-family: STHeiti;">
+									<div class="projectcatagory-brief-content">
+										<br /><br /><br /><br /><br /><br />
+										<h4>
+										项目名名称
+										</h4>
+									</div>
+								</div>
+	
+							</div>
+						</div>
+							
+					</div>
+				</div>
+				<!-- /.col-lg-4 -->
+				<div class="col-lg-4">
+					<div class="col-lg-4-technologyservice3">
+						<img class="img-thumbnail" src="../../assets/img/indexpage/demo4.jpg" alt="Generic placeholder image" style="width: 100%;height: 200px;">
+							
+							
+							<!--###########################此为鼠标移入后的显示###################################-->
+						<div class="col-lg-4-technologyservice-main3" style="visibility: hidden; position:absolute;width:100%;height:200px;color: white; background:url(../../assets/img/indexpage/半透明.png);z-indent:2;left:0;top:0;">
+	
+							<div style="width: 100%;height: 100%;overflow: hidden;float:left;">
+								<div class="projectcatagory-brief" style="font-size: 12px;width: 100%;height: 100%;font-family: STHeiti;">
+									<div class="projectcatagory-brief-content">
+										<br /><br /><br /><br /><br /><br />
+										<h4>
+										项目名名称
+										</h4>
+									</div>
+								</div>
+	
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-4">
+					<div class="col-lg-4-technologyservice4">
+						<img class="img-thumbnail" src="../../assets/img/indexpage/demo2.jpg" alt="Generic placeholder image"style="width: 100%;height: 200px;">
+							
+						<!--###########################此为鼠标移入后的显示###################################-->
+						<div class="col-lg-4-technologyservice-main4" style="visibility: hidden; position:absolute;width:100%;height:200px;color: white; background:url(../../assets/img/indexpage/半透明.png);z-indent:2;left:0;top:0;">
+	
+							<div style="width: 100%;height: 100%;overflow: hidden;float:left;">
+								<div class="projectcatagory-brief" style="font-size: 12px;width: 100%;height: 100%;font-family: STHeiti;">
+									<div class="projectcatagory-brief-content">
+										<br /><br /><br /><br /><br /><br />
+										<h4>
+										项目名名称
+										</h4>
+									</div>
+								</div>
+	
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.col-lg-4 -->
+				<div class="col-lg-4">
+					<div class="col-lg-4-technologyservice5">
+						<img class="img-thumbnail" src="../../assets/img/indexpage/demo3.jpg" alt="Generic placeholder image" style="width: 100%; height: 200px;">
+							
+							<!--###########################此为鼠标移入后的显示###################################-->
+						<div class="col-lg-4-technologyservice-main5" style="visibility: hidden; position:absolute;width:100%;height:200px;color: white; background:url(../../assets/img/indexpage/半透明.png);z-indent:2;left:0;top:0;">
+	
+							<div style="width: 100%;height: 100%;overflow: hidden;float:left;">
+								<div class="projectcatagory-brief" style="font-size: 12px;width: 100%;height: 100%;font-family: STHeiti;">
+									<div class="projectcatagory-brief-content">
+										<br /><br /><br /><br /><br /><br />
+										<h4>
+										项目名名称
+										</h4>
+									</div>
+								</div>
+	
+							</div>
+						</div>
+							
+					</div>
+				</div>
+				<!-- /.col-lg-4 -->
+				<div class="col-lg-4">
+					<div class="col-lg-4-technologyservice6">
+						<img class="img-thumbnail" src="../../assets/img/indexpage/demo4.jpg" alt="Generic placeholder image" style="width: 100%;height: 200px;">
+							
+							
+							<!--###########################此为鼠标移入后的显示###################################-->
+						<div class="col-lg-4-technologyservice-main6" style="visibility: hidden; position:absolute;width:100%;height:200px;color: white; background:url(../../assets/img/indexpage/半透明.png);z-indent:2;left:0;top:0;">
+	
+							<div style="width: 100%;height: 100%;overflow: hidden;float:left;">
+								<div class="projectcatagory-brief" style="font-size: 12px;width: 100%;height: 100%;font-family: STHeiti;">
+									<div class="projectcatagory-brief-content">
+										<br /><br /><br /><br /><br /><br />
+										<h4>
+										项目名名称
+										</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+										
+										
+										
+									<!--</div>-->
+								</div>
+								<hr class="featurette-divider" style="padding-bottom: 0px; margin-bottom: 0px;">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- FOOTER -->
+		<div class="container" style="width: 100%;height: 500px;background-color: #333333; overflow: hidden;">
+			<!--<footer>
+				<p class="pull-right">
+				<a href="#">Back to top</a>
+				</p>
+				</footer>-->
+
+			<div class="main-footer" style="margin: 0 auto;height: 100%;width: 80%;overflow: hidden;">
+				<div class="main-footer-title" style="width: 100%; height: 8%; margin-top: 20px;">
+					<h4 style="color: #398BE5;">
+							关于我们
+						</h4>
+				</div>
+				<div class="main-footer-top" style="width: 100%; height: 35%; margin-bottom: 0;padding-bottom: 0;">
+					<div class="main-footer-1">
+						<pre style="background-color: transparent;color: white;border: solid #333333 1px;width: 25%;float:left;font-size: 12px;">				
+基于信息高速流通的互联网打造线上下相结合
+的网络众创空间。用户通过具有创业社交
+性质的创业加网站可以清晰得区分出自身所具备
+的创业要素，并且发布真实有效的创业信
+息到相应的模块。
+				</pre>
+
+					</div>
+					<div class="main-footer-2">
+						<pre style="background-color: transparent;color: white;border: solid #333333 1px;width: 65%;float: right;font-size: 12px;">				
+基于信息高速流通的互联网打造线上下相结合的网络众创空间。用户通过具有创业社交性质的创业加网站可以清晰得区分出
+自身所具备的创业要素，并且发布真实有效的创业信息到相应的模块。基于线上即时通讯以及线下实地交流等方式找寻于自
+己相契合创业要素，共建现代新型合伙的商业组织，确保创业行为真实可靠，创业沟通及时有效，创业收益公平合理配合。
+				</pre>
+
+					</div>
+				</div>
+				<div class="main-footer-bottom" style="width: 100%; height: 35%;margin-top: 0;margin-top: 0;">
+					<div class="main-footer-3">
+						<pre style="background-color: transparent;color: white;border: solid #333333 1px;float:left;width: 25%;font-size: 12px;">				
+基于信息高速流通的互联网打造线上下相结合
+的网络众创空间。用户通过具有创业社交
+性质的创业加网站可以清晰得区分出自身所具备
+的创业要素，并且发布真实有效的创业信
+息到相应的模块。
+				</pre>
+
+					</div>
+					<div class="main-footer-4">
+						<pre style="background-color: transparent;color: white;border: solid #333333 1px;width: 65%;float:right;font-size: 12px;">				
+基于信息高速流通的互联网打造线上下相结合的网络众创空间。用户通过具有创业社交性质的创业加网站可以
+清晰得区分出自身
+所具备的创业要素，并且发布真实有效的创业信息到相应的模块。基于线上即时通讯以及线下实地交流等方式找寻于自己相契合
+创业要素，共建现代新型合伙的商业组织，确保创业行为真实可靠，创业沟通及时
+有效，创业收益公平合理配合。
+				</pre>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 点击登陆出现的登陆框 -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+								请登录
+							</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-horizontal" role="form">
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="email" class="form-control" id="modal-email" placeholder="Email" onblur="checkModalEmail()">
+								</div>
+								<div class="modal-errorInfo">
+									<span id="modal-gly-info" class="glyphicon">
+										</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-10">
+									<input type="password" class="form-control" id="modal-password" placeholder="Password">
+								</div>
+								<div class="modal-errorInfo">
+									<span id="modal-gly-password-info" class="glyphicon">
+										</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							关闭
+						</button>
+						<button type="button" class="btn btn-default" id="modal-submit" onclick="checkModalData()">
+							登陆
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+<!--#####此div是用来加载即时通讯页面-->
+<!--#####此div是用来加载即时通讯页面-->
+<!--#####此div是用来加载即时通讯页面-->
+<!--
+	作者：635142812@qq.com
+	时间：2016-04-18
+	描述：此处是即时通讯的核心ajax代码片段
+-->
+
+               <script>
+               var $_GET = (function(){
+                   var url = window.document.location.href.toString();
+                   var u = url.split("?");
+                  if(typeof(u[1]) == "string")
+                  {
+                     u = u[1].split("&");
+                     var get = {};
+                  for(var i in u)
+                  {
+                     var j = u[i].split("=");
+                    get[j[0]] = j[1];
+                  }
+                    return get;
+                  } else 
+                   {
+                     return {};
+                   }
+                   })();
+               function add(id,text,type)
+               {
+				var addDiv = $('<div></div>');
+				addDiv.attr('class','item_user_message');
+				addDiv.attr('id','item');
+				addDiv.attr("style","width: 90%;background-color: ;margin: 10px auto;");
+				var parent = $("#item_user_message");
+				addDiv.appendTo(parent);
+                
+
+				var addDivText = $('<div></div>');
+				addDivText.attr('class','item_messsage_2');
+				addDivText.attr('id','item_messsage_2');
+				var parent = $("#item");
+				addDivText.appendTo(parent);
+                
+			if(type==0)
+			{
+				var addSpanText = $('<p></p>');
+				addSpanText.text(text);
+				addSpanText.attr("style","border:1px; background:#097");
+				var parent = $("#item_messsage_2");
+				addSpanText.appendTo(parent);
+			}
+			else
+			{
+				var addSpanText = $('<p></p>');
+				addSpanText.text(text);
+				addSpanText.attr("style","border:1px; background:#43F");
+				var parent = $("#item_messsage_2");
+				addSpanText.appendTo(parent);
+			}; 
+		}
+              function showMessages()
+   			  {
+      			$(document).ready(function() {
+           		 $.ajax({
+                        type: "GET",
+                        dataType: "json",
+                        url: "../../model/chatroom.php",  
+                        timeout: 1000, //ajax请求超时时间1秒 
+                        data: {time: "1000",from_user_id:$_GET['from_user_id']},
+                        success: function(data, textStatus) {
+                            //从服务器得到数据，显示数据并继续查询 
+                           if (data.success == "1") {   
+                           	var l=data.count;
+                            for(var i=0;i<l;i++)
+                              	add(data.list[i]["chat_id"],data.list[i]["chat_content"],0);
+                            }                  
+                        },
+                        //Ajax请求超时，继续查询    
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            if (textStatus == "timeout") {
+                                evdata.data.btn.click();
+                            }
+                        }
+          			  });
+        			});
+    		  }
+
+    		setInterval('showMessages()',1000);
+
+    			$(function(){ 
+ 				$("#btn").bind("click",{btn:$("#btn")},function(evdata){  
+  					$.ajax({  
+   			        type:"GET",  
+    				dataType:"json",  
+    				url:"../../action/chat/chat.php",
+    				data:{to_user_id:$_GET['from_user_id'],chat_content:document.getElementById("send_message").value}, //40秒后无论结果服务器都返回数据  
+    				success:function(data,textStatus){ 
+    					 if (data.success == "1") {   
+                            add("me",document.getElementById("send_message").value,1);
+                            document.getElementById("send_message").value="";
+                            }  
+                            else
+                            {
+                            	alert("send fail");
+                            }
+
+             },  
+             //Ajax请求超时，继续查询  
+                    error:function(XMLHttpRequest,textStatus,errorThrown){  
+                    if(textStatus=="timeout"){  
+                   $("#msg").append("<br>[超时]");  
+                  evdata.data.btn.click();  
+                 }  
+               }  
+               });  
+            });  
+          }); 
+
+</script>
+<div class="modal fade" id="IM_dialog_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel001" aria-hidden="true">
+	<div class="modal-dialog  modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel001">
+								联系交流
+				</h4>
+			</div>
+			<div class="modal-body">
+				
+				
+				<div class="form-horizontal" role="form">
+
+					<div class="marketing-nav">
+						<ul class="nav nav-tabs marketing-nav-content" role="tablist" id="myTab">
+							<li role="presentation" class="active"><a href="#now_message_info" role="tab" data-toggle="tab" style="color: #398BE5;">当前消息</a></li>
+							<li role="presentation"><a href="#history_message" role="tab" data-toggle="tab" style="color: black;">历史消息</a></li>
+						</ul>
+					</div>
+
+					<!--##############################################此为当前消息-->
+					<div class="tab-content" style="background-color: white;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+						<div role="tabpanel" class="tab-pane active" id="now_message_info">
+							<div class="tab-content-1" style="width: 100%;height: 680px;margin: 0 auto; background-color: #F5F5F5;">
+								<div class="form-horizontal" role="form" style="margin-left: 0px;">
+
+									<div class="" style="width: 100%;height: 400px;background-color: ;overflow:auto;border-bottom: solid #A9A9A9 1px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+										<!--此处为每个用户聊天的信息！-->
+										<div class="item_user_message" id="item_user_message" style="width: 90%;background-color: ;margin: 10px auto;">
+											<!--获取时间-->
+												
+											<div class="item_user_message" style="width: 90%;background-color: ;margin: 10px auto;">
+												<div class="item_messsage_2">
+													<span>用户002说了一大堆的废话啊！</span>
+												</div>
+											</div>
+									</div>
+									<style>
+										.item_username_1 {
+											color: #398BE5;
+											font-weight: bold;
+											font-size: 19px;
+											font-family: "微软雅黑";
+										}
+										
+										.item_username_2 {
+											color: #A9A9A9;
+											font-weight: bold;
+											font-size: 19px;
+											font-family: "微软雅黑";
+										}
+									</style>
+								</div>
+
+								<script>
+									//此处是使用KE在线编辑器
+									/*KE.show({
+										id: 'im_input',
+										resizeMode: 1,
+										allowPreviewEmoticons: false,
+										allowUpload: false,
+										items: [
+											'fontname', 'fontsize', '|', 'textcolor', 'bgcolor', 'bold', 'italic', 'underline',
+											'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+											'insertunorderedlist', '|', 'emoticons', 'image', 'link'
+										]
+									});*/
+								</script>
+								<div>
+									<div class="form-group" style="padding-top:15px;">
+										<div class="col-sm-12">
+											<textarea id="send_message" name="username_message" style="width:100%;height:130px;"></textarea>
+										</div>
+									</div>
+								</div>
+								<div style="margin: 25px auto;">
+									<div class="form-group" style="margin: 0 auto; text-align: center;">
+										<button id="btn"type="submit" class="btn btn-default btn-lg" style="border: solid #A9A9A9 2px; border-radius: 10px;">发送</button>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+						<!--######################此处为历史消息-->
+						<div role="tabpanel" class="tab-pane" id="history_message">
+							<div class="tab-content-1" style="width: 100%;margin: 0px auto; background-color: white;">
+								<div class="form-horizontal" role="form" style="margin-left: 0px;">
+									<div class="tab-content-1" style="width: 100%;height: 680px;margin: 0 auto; background-color: #F5F5F5;">
+										<div class="form-horizontal" role="form" style="margin-left: 0px;">
+
+											<div class="" style="width: 100%;height: 600px;background-color: ;overflow:auto;border-bottom: solid #A9A9A9 1px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+																			
+											<div class="item_user_message" id="history_message" style="width: 90%;background-color: ;margin: 10px auto;">
+												<div class="item_username_2">
+													<span>用户002:</span>
+												</div>
+												<div class="item_messsage_2">
+													<span>用户002说了一大堆的废话啊！</span>
+												</div>
+											</div>
+											</div>
+											<style>
+												.item_username_1 {
+													color: #398BE5;
+													font-weight: bold;
+													font-size: 19px;
+													font-family: "微软雅黑";
+												}
+												
+												.item_username_2 {
+													color: #A9A9A9;
+													font-weight: bold;
+													font-size: 19px;
+													font-family: "微软雅黑";
+												}
+											</style>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+			</div>
+		</div>
+				
+				
+				
+		
+			</div>
+			<div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		    </div>
+			
+		</div>
+	</div>
+</div>
+
+
+	</body>
+	<script>
+		$('#myTab a').click(function(e) {
+			e.preventDefault()
+			$(this).tab('show')
+		})
+	</script>
+</html>

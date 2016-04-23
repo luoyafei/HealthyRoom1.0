@@ -66,7 +66,7 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="<%=base %>/index.jsp">首页</a></li>
-						<li><a class="text-primary" href="#">关于我们</a></li>
+						<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/about_our.jsp">关于我们</a></li>
 						<li><a class="text-primary" href="<%=base %>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
 						<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp">看健身房</a></li>
 						<form class="navbar-form navbar-left" role="search">
@@ -115,7 +115,6 @@ System.out.println("该用户尚未发出任何主题帖！");
 							Dropdown</span> </a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="/HealthyRoom1.0/pages/action.jsp">个人中心</a></li>
-							<!-- <li><a href="/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp">为我制定健身计划</a></li> -->
 							<li><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的消息 <span class="badge" style="background-color: red;"><%=notReadNum %></span></a></li>
 							<li class="divider"></li>
 							<li><a href="/HealthyRoom1.0/RemoveUserSession">注销</a></li>
@@ -143,7 +142,7 @@ System.out.println("该用户尚未发出任何主题帖！");
 					<div style="width: 80%;height: 30%;margin: 0 auto;margin-bottom: 20%;">
 
 						<div style="width: 75%; height: 75%;margin: 0 auto; margin-bottom: 10px;">
-							<img class="img-circle" id="userpicture" style="width: 100%; height: 100%;" alt="" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=userName %>.jpg" />
+							<img class="img-thumbnail" id="userpicture" style="width: 100%; height: 100%;" alt="" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=userName %>.jpg" />
 						</div>
 						<div class="form-group" style="width: 100%;height: 40%;">
 							<div style="width: 100%;height: 100%;text-align: center;">
@@ -224,7 +223,7 @@ System.out.println("该用户尚未发出任何主题帖！");
 				               <div class="main-left" style="float: left;">
 				                   <div class="img1" style="margin-right: 10px;height: 150px;">
 				                        <div style="height:80%;">
-				                       		<img class="img-circle" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=username %>.jpg" alt="" style="width:90px;height: 80%;">
+				                       		<img class="img-thumbnail" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=username %>.jpg" alt="" style="width:90px;height: 80%;">
 				                       </div>
 				                       <div style="height:18%;margin-top: 1%;">
 				                       		<span style="float:left;margin-left:10px;" class="floorhost">楼主：<%=username %></span>

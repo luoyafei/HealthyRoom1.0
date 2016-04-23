@@ -68,9 +68,9 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li><a href="<%=base %>/index.jsp">首页</a></li>
-						<li><a class="text-primary" href="#">关于我们</a></li>
+						<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/about_our.jsp">关于我们</a></li>
 						<li><a class="text-primary" href="<%=base %>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
-						<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp">看健身房</a></li>
+						<li class="active"><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp">看健身房</a></li>
 						<form class="navbar-form navbar-left" role="search">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Search">
@@ -109,7 +109,6 @@
 							Dropdown</span> </a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="/HealthyRoom1.0/pages/action.jsp">个人中心</a></li>
-							<!-- <li><a href="/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp">为我制定健身计划</a></li> -->
 							<li><a href="/HealthyRoom1.0/pages/healthyforum/selfThemePage.jsp">我的消息 <span class="badge" style="background-color: red;"><%=notReadNum %></span></a></li>
 							<li class="divider"></li>
 							<li><a href="/HealthyRoom1.0/RemoveUserSession">注销</a></li>
@@ -350,29 +349,14 @@
 		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
-		<div id="logindialogspan"></div>
+		<div id="logindialogspan">
+			<jsp:include page="../action_include/logindialog.jsp" flush="true"></jsp:include>
+		</div>
 		<div id="uploadPicture"></div>
 		<script>
 		function changePhoto() {
 			$("#changeModal").modal('show');
 		}
-		
-		$(document).ready(function() {
-			/* $("#jump").bind('click', function() {
-	    		$(".floorhost").html("你好");
-	    	}); */
-	    	
-	    	$(".pager a").bind('click', function() {
-	    		
-	    		/* $post("/HealthyRoom1.0/updateThemeItem"), {
-	    			itemId : $(this).text()
-	    		}, function (data, textStatus) {
-	    			
-	    		}; */
-	    	});
-	    	
-			$("#logindialogspan").load("<%=base %>/pages/action_include/logindialog.jsp");
-		});
 		
 		function checkcontent() {
 

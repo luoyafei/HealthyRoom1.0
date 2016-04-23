@@ -65,7 +65,7 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="<%=base %>/index.jsp">首页</a></li>
-					<li><a class="text-primary" href="#">关于我们</a></li>
+					<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/about_our.jsp">关于我们</a></li>
 					<li><a class="text-primary"
 						href="<%=base%>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
 					<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp">看健身房</a></li>
@@ -107,7 +107,6 @@
 							Dropdown</span> </a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="/HealthyRoom1.0/pages/action.jsp">个人中心</a></li>
-							<!-- <li><a href="/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp">为我制定健身计划</a></li> -->
 							<li><a href="/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp">我的消息 <span class="badge" style="background-color: red;"><%=notReadNum %></span></a></li>
 							<li class="divider"></li>
 							<li><a href="/HealthyRoom1.0/RemoveUserSession">注销</a></li>
@@ -244,7 +243,7 @@
         	<div style="width: 80%;height: 30%;margin: 0 auto;margin-bottom: 20%;">
         		
         		<div style="width: 75%; height: 75%;margin: 0 auto; margin-bottom: 10px;">
-        			<img class="img-circle" style="width: 100%; height: 100%;" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=userName %>.jpg" />
+        			<img class="img-thumbnail" style="width: 100%; height: 100%;" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=userName %>.jpg" />
         		</div>
         		<div class="form-group" style="width: 100%;height: 40%;">
         			<div style="width: 100%;height: 100%;text-align: center;">

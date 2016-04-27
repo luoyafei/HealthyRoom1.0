@@ -152,7 +152,7 @@
 
 					<div
 						style="width: 75%; height: 75%; margin: 0 auto; margin-bottom: 10px;">
-						<img class="img-circle" id="userpicture"
+						<img class="img-thumbnail" id="userpicture"
 							style="width: 100%; height: 100%;" alt=""
 							src="/HealthyRoom1.0/userassets/userPhoto/img/<%=userName%>.jpg" />
 					</div>

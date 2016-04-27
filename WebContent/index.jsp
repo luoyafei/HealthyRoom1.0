@@ -231,10 +231,10 @@
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>西科梦想减肥健身行</h1>
-						<p>
+<!-- 						<p>
 							<a class="btn btn-lg btn-primary" href="#" role="button">查看更多</a>
 						</p>
-					</div>
+ -->					</div>
 				</div>
 			</div>
 			<div class="item">
@@ -243,9 +243,9 @@
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>西科梦想减肥健身行</h1>
-						<p>
+						<!-- <p>
 							<a class="btn btn-lg btn-primary" href="#" role="button">查看更多</a>
-						</p>
+						</p> -->
 					</div>
 				</div>
 			</div>
@@ -255,9 +255,9 @@
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>西科梦想减肥健身行</h1>
-						<p>
+						<!-- <p>
 							<a class="btn btn-lg btn-primary" href="#" role="button">查看更多</a>
-						</p>
+						</p> -->
 					</div>
 				</div>
 			</div>

@@ -305,20 +305,20 @@
 						if(itemId == 1)//当输入为1时，将上一页按钮禁止
 							out.print("<li class='disabled'><a>&larr;</a></li>");
 						else
-							out.print("<li><a href='/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp?itemId=" + (itemId-1) + "'>&larr;</a></li>");
+							out.print("<li><a href='/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp?itemId=" + (itemId-1) + "'>&larr;</a></li>");
 						
 						
 						for(int i=1; i <= allButtons; i++) {
 							if(itemId == i)
-								out.print("<li class='active'><a href='/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp?itemId=" + i + "'>" + i + "</a></li>");
+								out.print("<li class='active'><a href='/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp?itemId=" + i + "'>" + i + "</a></li>");
 							else
-								out.print("<li><a href='/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp?itemId=" + i + "'>" + i + "</a></li>");
+								out.print("<li><a href='/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp?itemId=" + i + "'>" + i + "</a></li>");
 						}
 //System.out.println(allButtons + "," + itemId);						
 						if(itemId == allButtons)//当输入为总数时，将下一页按钮禁止
 							out.print("<li class='disabled'><a>&rarr;</a></li>");
 						else
-							out.print("<li><a href='/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp?itemId=" + (itemId+1) + "'>&rarr;</a></li>");
+							out.print("<li><a href='/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp?itemId=" + (itemId+1) + "'>&rarr;</a></li>");
 					%>
 				    	<li><input type="text" style="width:30px;" id="jump" name="itemId"/></li>
 				    	<li><a type="submit" onclick="submitItemId()">跳</a></li>
@@ -326,7 +326,7 @@
 					    
 					    <script>
 					    	function submitItemId() {
-					    		window.location.href = "/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp?itemId="+$("#jump").val().trim();
+					    		window.location.href = "/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp?itemId="+$("#jump").val().trim();
 					    	}
 					    </script>
 					  </ul>

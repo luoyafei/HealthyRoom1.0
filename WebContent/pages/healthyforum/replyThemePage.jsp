@@ -242,7 +242,7 @@
 				               <div class="main-left" style="float: left;">
 				                   <div class="img1" style="margin-right: 10px;height: 150px;">
 				                        <div style="height:80%;">
-				                       		<img class="img-thumbnail" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=replyusername %>.jpg" alt="" style="width:90px;height: 80%;">
+				                       		<img class="img-thumbnail" src="/HealthyRoom1.0/userassets/userPhoto/img/<%=replyusername %>.jpg" alt="img not found" style="width:90px;height: 80%;">
 				                       </div>
 				                       <div style="height:18%;margin-top: 1%;">
 				                       		<span style="float:left;margin-left:10px;">层主：<%=replyusername %></span>
@@ -256,7 +256,7 @@
 				                   <h5 style="float:right;margin-right:10px;">回帖时间：<%=replyTheme.getReplytime() %>&nbsp;
 				                   		<%
 				                   			if(userId == replyTheme.getUserId()) {
-				                   				out.print("<a href=''>删除</a>");
+				                   				//out.print("<a>删除</a>");
 				                   			}
 				                   		%>
 				                   </h5>

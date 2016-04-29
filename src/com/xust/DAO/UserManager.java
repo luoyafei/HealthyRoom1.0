@@ -155,4 +155,9 @@ public class UserManager {
 		// TODO Auto-generated method stub
 		return dao.deleteGym(userId);
 	}
+
+	public Integer getSearchThemeListSize(String searchText) {
+		// TODO Auto-generated method stub
+		return dao.getSearchThemeListSize(searchText);
+	}
 }

@@ -17,6 +17,34 @@ import com.xust.bean.UserDetailInfo;
 public class UserMysqlDAO implements UserDAO {
 
 	@Override
+	public Integer getSearchThemeListSize(String searchText) {
+		// TODO Auto-generated method stub
+		Integer resultSize = -1;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			String sql = "select count(*) from theme where cont like ?";
+			pstmt = JDBCUtil.preparedStatement(conn, sql);
+			String para = "%" + searchText + "%";
+			pstmt.setString(1, para);
+			rs = pstmt.executeQuery();
+			rs.next();
+			resultSize = rs.getInt(1);
+System.out.println(sql + "," + para + ":" + resultSize);			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.closedConn(conn);
+			JDBCUtil.closedPstmt(pstmt);
+			JDBCUtil.closedRs(rs);
+		}
+		return resultSize;
+	}
+
+	@Override
 	public ArrayList<PublishHealthyRoom> getAllPubHeaRoom() {
 		// TODO Auto-generated method stub
 		ArrayList<PublishHealthyRoom> phrs = new ArrayList<PublishHealthyRoom>();

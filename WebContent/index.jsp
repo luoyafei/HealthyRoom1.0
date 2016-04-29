@@ -25,29 +25,18 @@
 
 <title>西科健身交流平台</title>
 
-<!-- Bootstrap core CSS -->
-<link href="assets/bootstrap-3.3.5/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+	<!-- Bootstrap core CSS -->
+	<link href="assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="./js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script
-	src="assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
+	<script src="assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="./js/html5shiv.min.js"></script>
-      <script src="./js/respond.min.js"></script>
-    <![endif]-->
+	<link href="assets/bootstrap-3.3.5/docs/examples/carousel/carousel.css" rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="assets/bootstrap-3.3.5/docs/examples/carousel/carousel.css"
-	rel="stylesheet">
-
-<link rel="shortcut icon" href="assets/img/icon1.jpg">
+	<link rel="shortcut icon" href="assets/img/icon1.jpg">
+	<script src="assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
+	<script src="assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
+	<script src="assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 </head>
-<!-- NAVBAR
-================================================== -->
 
 <body style="padding-bottom: 0px;">
 
@@ -70,13 +59,23 @@
 					<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/about_our.jsp">关于我们</a></li>
 					<li><a class="text-primary" href="<%=base %>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
 					<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp">看健身房</a></li>
-					<form class="navbar-form navbar-left" role="search">
+					<form action="/HealthyRoom1.0/SearchThemeAction" method="post" class="navbar-form navbar-left" role="search" onsubmit="return chechSearchValue()">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search">
+							<input type="text" name="searchTheme" id="searchTheme" class="form-control" placeholder="Search">
 						</div>
 						<button type="submit" class="btn btn-default">快速搜索</button>
 					</form>
-
+					<script>
+						function chechSearchValue() {
+							if($("#searchTheme").val().trim() != "" && $("#searchTheme").val().trim().length < 10)
+								return true;
+							else {
+								alert("请输入您想搜索的主题内容的关键字！请将字数限制在10个以内!");
+								return false;
+							}
+								
+						}
+					</script>
 				</ul>
 				<div class="navbar-form pull-right">
 
@@ -112,7 +111,6 @@
 								if (xmlhttp.readyState == 4) {
 									if (xmlhttp.status == 200) {
 										if (xmlhttp.responseText) {
-											//alert(xmlhttp.responseText);
 											addNodePswOk();
 											$('#myModal').modal('hide');
 											$("#login-register-bar").load(
@@ -149,7 +147,6 @@
 								if (xmlhttp.readyState == 4) {
 									if (xmlhttp.status == 200) {
 										if (xmlhttp.responseText) {
-											//alert(xmlhttp.responseText);
 											addNodeOk();
 										} else {
 											addNodeRemove();
@@ -175,7 +172,6 @@
 						}
 						/*此函數用于模态框内提示password是否正確*/
 						function addNodePswOk() {
-							/* $("#modal-gly-password-info").removeClass("glyphicon-remove").addClass("glyphicon-ok"); */
 							$("#modal-gly-password-info")
 									.replaceWith(
 											"<span id='modal-gly-password-info' class='glyphicon glyphicon-ok'></span>");
@@ -189,34 +185,14 @@
 						/* 此为模态框成功登陆后做的操作 */
 						function successLogin() {
 							$('#myModal').modal('hide');
-							//$("#login-register-bar").replaceWith("<div class='btn-group navbar-form pull-right'><button type='button' class='btn btn-default btn-large'><a href='#'><span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp;&nbsp;用户名</a></button><button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'><span class='caret'></span><span class='sr-only'>Toggle Dropdown</span></button><ul class='dropdown-menu' role='menu'><li><a href='#'>个人中心</a></li><li><a href='#'>我的项目</a></li><li><a href="#'>我的消息</a></li><li class='divider'></li><li><a href='#'>登出</a></li></ul></div>");
 						}
 					</script>
 				</div>
 
-				<!-- Split button -->
-				<!--					<div class="btn-group navbar-form pull-right">
-						<button type="button" class="btn btn-default btn-large"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;用户名</a></button>
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">个人中心</a></li>
-							<li><a href="#">我的项目</a></li>
-							<li><a href="#">我的消息</a></li>
-							<li class="divider"></li>
-							<li><a href="#">登出</a></li>
-						</ul>
-					</div>
-				
-				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</nav>
 
-	<!-- Carousel
-    ================================================== -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
@@ -231,10 +207,7 @@
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>西科梦想减肥健身行</h1>
-<!-- 						<p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">查看更多</a>
-						</p>
- -->					</div>
+					</div>
 				</div>
 			</div>
 			<div class="item">
@@ -243,9 +216,6 @@
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>西科梦想减肥健身行</h1>
-						<!-- <p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">查看更多</a>
-						</p> -->
 					</div>
 				</div>
 			</div>
@@ -255,9 +225,6 @@
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>西科梦想减肥健身行</h1>
-						<!-- <p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">查看更多</a>
-						</p> -->
 					</div>
 				</div>
 			</div>
@@ -271,14 +238,8 @@
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	<!-- /.carousel -->
-
-	<!-- Marketing messaging and featurettes
-    ================================================== -->
-	<!-- Wrap the rest of the page in another container to center all the content. -->
 
 	<div class="container marketing">
-		<!-- Three columns of text below the carousel -->
 		<div class="thumbtitle">
 			<h1>健身技巧快速学习</h1>
 		</div>
@@ -294,7 +255,6 @@
 					<a class="btn btn-default" href="/HealthyRoom1.0/pages/public_visit/showDetail001.jsp" role="button">查看详细 &raquo;</a>
 				</p>
 			</div>
-			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
 				<a href="/HealthyRoom1.0/pages/public_visit/showDetail002.jsp">
 					<img class="img-thumbnail" src="assets/img/jianshen/a14e5abegw1exqgot5pnog208c05kwjq.gif"
@@ -305,7 +265,6 @@
 					<a class="btn btn-default" href="/HealthyRoom1.0/pages/public_visit/showDetail002.jsp" role="button">查看详细 &raquo;</a>
 				</p>
 			</div>
-			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
 				<a href="/HealthyRoom1.0/pages/public_visit/showDetail003.jsp">
 					<img class="img-thumbnail" src="assets/img/jianshen/fa500ff3d7ca7bcb2ccf63fdbf096b63f724a80e.jpg"
@@ -316,9 +275,7 @@
 					<a class="btn btn-default" href="/HealthyRoom1.0/pages/public_visit/showDetail003.jsp" role="button">查看详细 &raquo;</a>
 				</p>
 			</div>
-			<!-- /.col-lg-4 -->
 		</div>
-		<!-- /.row -->
 	</div>
 
 	<div class="jumbotitle">
@@ -330,11 +287,8 @@
 		</div>
 	</div>
 
-	<!-- /.container -->
-
 	<hr class="featurette-divider">
 
-	<!-- FOOTER -->
 	<div style="width:100%; background-color: #333333;">
 		<div class="container">
 			<footer>
@@ -389,15 +343,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
-	<script src="assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script
-		src="assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 
 </html>

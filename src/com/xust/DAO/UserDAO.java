@@ -37,4 +37,5 @@ public interface UserDAO {
 	public UserDetailInfo getUserDetailInfo(int userId);
 	public String updateUserPassword(int userId, String repassword, String newpassword);//更改用户的密码！
 	public boolean deleteGym(int userId);
+	public Integer getSearchThemeListSize(String searchText);//获取通过导航栏上面的提交的模糊查询到的主题帖的个数
 }

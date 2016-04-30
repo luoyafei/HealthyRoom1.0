@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
+	</head>
+	<body>
+		<img class="img-circle" title="hello" style="width: 100px;" src="../WebContent/assets/img/login/0.jpg" />
+		<img class="img-circle" style="width: 100px;" src="../WebContent/assets/img/login/0.jpg" />
+		<img class="img-circle" style="width: 100px;" src="../WebContent/assets/img/login/00.jpg" />
+		<img class="img-circle" style="width: 100px;" src="../WebContent/assets/img/login/1.jpg" />
+		<img class="img-circle" style="width: 100px;" src="../WebContent/assets/img/login/00.jpg" />
+		<img class="img-circle" style="width: 100px;" src="../WebContent/assets/img/login/0.jpg" />
+		<!--<img class="img-circle" src="../WebContent/assets/img/login/0.jpg" />-->
+		<script>
+			$(document).ready(function() {
+				var $img = $(".img-circle");
+				$img.bind('error', function() {
+					this.src = "/HealthyRoom1.0/WebContent/assets/img/searchNull/123.jpg";
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -26,7 +26,7 @@ public class UserMysqlDAO implements UserDAO {
 		
 		try {
 			conn = JDBCUtil.getConnection();
-			String sql = "select count(*) from theme where cont like ?";
+			String sql = "select count(*) from theme where title like ?";
 			pstmt = JDBCUtil.preparedStatement(conn, sql);
 			String para = "%" + searchText + "%";
 			pstmt.setString(1, para);
@@ -51,7 +51,7 @@ public class UserMysqlDAO implements UserDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int startNum = itemId * 5; 
-		String sql = "select * from theme where cont like ? order by themeId desc limit ?,5";
+		String sql = "select * from theme where title like ? order by themeId desc limit ?,5";
 //System.out.println(sql);
 		ResultSet rs = null;
 		try {

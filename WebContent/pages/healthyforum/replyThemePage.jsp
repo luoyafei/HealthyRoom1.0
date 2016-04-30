@@ -27,11 +27,16 @@
 		<title>荟萃论坛</title>
 
 		<link href="../../assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-
 		<link href="../dashboard.css" rel="stylesheet">
-
+		<script src="../../assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
+		<script src="../../assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
+		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
+		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
 		<script charset="utf-8" src="../../assets/ke/kindeditor.js"></script>
+		<script src="../js/replaceImg.js"></script>
+		
+		
 		<style>
 			.col-md-4,
 			.col-md-8,
@@ -52,10 +57,6 @@
 			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 			});
 		</script>
-		<script src="../../assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
-		<script src="../../assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
-		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
-		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 	</head>
 
 	<body>

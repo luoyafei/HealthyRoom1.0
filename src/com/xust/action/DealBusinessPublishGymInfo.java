@@ -69,9 +69,9 @@ public class DealBusinessPublishGymInfo extends HttpServlet {
 		
 		OutputStream[] outputs = new OutputStream[3];
 		for(int j = 0; j < inputs.length; j++) {
-			String fileurl = "G:\\Eclipse\\Project\\EclipseEEProject\\HealthyRoom1.0\\WebContent\\business_healthyroomUp\\" + gymName + j + ".jpg";
+			String fileurl = "G:\\Eclipse\\Project\\EclipseEEProject\\HealthyRoom1.0\\WebContent\\business_healthyroomUp\\" + gymTel + j + ".jpg";
 			/*photoUrls[j] = "/HealthyRoom1.0/business_healthyroomUp/" + gymName + j + ".jpg";*/
-			photoUrls[j] = gymName + j + ".jpg";
+			photoUrls[j] = gymTel + j + ".jpg";
 			File f = new File(fileurl);
 			outputs[j] = new FileOutputStream(f);
 		}
@@ -118,7 +118,7 @@ public class DealBusinessPublishGymInfo extends HttpServlet {
 		
 		if(insertResult) {
 System.out.println("商家发布健身房信息成功！");
-			response.sendRedirect("/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp");
+			response.sendRedirect("/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp");
 			//response.sendRedirect("/HealthyRoom1.0/index.jsp");
 			//this.getServletConfig().getServletContext().getRequestDispatcher("/HealthyRoom1.0/pages/healthyforum/show_healthyroom_info.jsp").forward(request, response);
 			return;

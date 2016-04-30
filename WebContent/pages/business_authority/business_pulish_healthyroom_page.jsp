@@ -27,32 +27,15 @@
 
 <title>荟萃论坛</title>
 
-	<!-- Bootstrap core JavaScript
-	    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="../../assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
 	<script src="../../assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
-	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-	<script
-		src="../../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script
-		src="../../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
-<!-- Bootstrap core CSS -->
-		<link href="../../assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-
-		<!-- Custom styles for this template -->
-		<link href="../dashboard.css" rel="stylesheet">
-
-		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
-		<script charset="utf-8" src="../../assets/ke/kindeditor.js"></script>
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<script src="../../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
+	<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+	<link href="../../assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<link href="../dashboard.css" rel="stylesheet">
+	<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
+	<script charset="utf-8" src="../../assets/ke/kindeditor.js"></script>
+	<script src="../js/replaceImg.js"></script>
 <style>
 .col-md-4, .col-md-8, .col-md-10 {
 	text-align: center;
@@ -226,15 +209,12 @@
 											<div class="tab-content-1"
 												style="width: 80%; height: 780px; margin: 0 auto; background-color: white;">
 												
-												<form action="/HealthyRoom1.0/DealBusinessPublishGymInfo" method="post" class="form-horizontal" role="form" style="margin-left: 0px;" enctype="multipart/form-data" onsubmit="<!-- checkcontent ()-->">
+												<form action="/HealthyRoom1.0/DealBusinessPublishGymInfo" method="post" class="form-horizontal" role="form" style="margin-left: 0px;" enctype="multipart/form-data" onsubmit="return checkcontent ()">
 													<div style="border-bottom: dashed #A9A9A9 1px;">
-														<div class="form-group"
-															style="margin-right: 0px; padding-top: 15px;">
-															<label for="create-project-name1"
-																class="col-sm-2 control-label"
-																style="font-size: 18px; font-weight: normal;">健身房名称</label>
+														<div class="form-group" style="margin-right: 0px;padding-top: 15px;">
+															<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px; font-weight: normal;">健身房名称</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" name="gymName"
+																<input type="text" class="form-control" name="gymName" id="gymName"
 																	style="background-color: #F5F5F5;" placeholder="健身房名称">
 															</div>
 														</div>
@@ -247,7 +227,7 @@
 																class="col-sm-2 control-label"
 																style="font-size: 18px; font-weight: normal;">健身房地址</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" name="gymAddr"
+																<input type="text" class="form-control" name="gymAddr" id="gymAddr"
 																	style="background-color: #F5F5F5;" placeholder="健身房地址">
 															</div>
 														</div>
@@ -260,7 +240,7 @@
 																class="col-sm-2 control-label"
 																style="font-size: 18px; font-weight: normal;">资费描述</label>
 															<div class="col-sm-10">
-																<input type="text" class="form-control" name="gymPrice"
+																<input type="text" class="form-control" name="gymPrice" id="gymPrice"
 																	style="background-color: #F5F5F5;" placeholder="资费描述">
 															</div>
 														</div>
@@ -272,7 +252,7 @@
 																class="col-sm-2 control-label"
 																style="font-size: 18px; font-weight: normal;">联系方式</label>
 															<div class="col-sm-10">
-																<input type="tel" class="form-control" name="gymTel" style="background-color: #F5F5F5;" placeholder="联系方式">
+																<input type="tel" class="form-control" name="gymTel" id="gymTel" style="background-color: #F5F5F5;" placeholder="联系方式">
 															</div>
 														</div>
 													</div>
@@ -299,7 +279,7 @@
 																class="col-sm-2 control-label"
 																style="font-size: 18px; font-weight: normal;">健身房简介&nbsp;&nbsp;</label>
 															<div class="col-sm-10">
-																<textarea id="healthyRoomIntroduce" name="gymIntroduce" style="width: 100%; height: 200px; visibility: hidden;"></textarea>
+																<textarea id="healthyRoomIntroduce" name="gymIntroduce" id="gymIntroduce" style="width: 100%; height: 200px; visibility: hidden;"></textarea>
 															</div>
 														</div>
 													</div>
@@ -319,9 +299,8 @@
 													</div>
 
 													<div style="margin: 50px auto;">
-														<div class="form-group"
-															style="margin: 0 auto; text-align: center;">
-															<%=isPublish?"":"<button type='submit' class='btn btn-default' style='border: solid #A9A9A9 2px; border-radius: 10px;'>确认发布</button>" %>
+														<div class="form-group" style="margin: 0 auto; text-align: center;">
+															 <button type='submit' class='btn btn-default' style='border: solid #A9A9A9 2px; border-radius: 10px;'>确认发布</button>
 														</div>
 													</div>
 												</form>
@@ -330,9 +309,12 @@
 									</div>
 <script type="text/javascript">
 	function checkcontent() {
-		var file1 = $(".file1");
-		alert(file1);
-		return false;
+		if($("#gymName").val().trim()!="" && $("#gymAddr").val().trim()!="" && $("#gymIntroduce").val().trim()!="" && $("#gymTel").val().trim()!="" && $("#gymPrice").val().trim()!="") {
+			return true;
+		} else {
+			alert("请将信息填写完整");
+			return false;
+		}
 	}
 </script>
 
@@ -411,9 +393,9 @@
 															class="col-sm-2 control-label"
 															style="font-size: 18px; font-weight: normal;">健身房图片</label>
 														<div class="col-sm-10">
-															<img alt="" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=gymInfo.getGymName()+"0" %>.jpg" style="width:30%; height: 200px;">
-															<img alt="" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=gymInfo.getGymName()+"1" %>.jpg" style="width:30%; height: 200px;">
-															<img alt="" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=gymInfo.getGymName()+"2" %>.jpg" style="width:30%; height: 200px;">
+															<img alt="" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=gymInfo.getGymTel()+"0" %>.jpg" style="width:30%; height: 200px;">
+															<img alt="" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=gymInfo.getGymTel()+"1" %>.jpg" style="width:30%; height: 200px;">
+															<img alt="" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=gymInfo.getGymTel()+"2" %>.jpg" style="width:30%; height: 200px;">
 														</div>
 													</div>
 												</div>
@@ -502,7 +484,6 @@
 	<script>
 		
 		$('#myTab a').click(function(e) {
-			//e.preventDefault()
 			$(this).tab('show')
 		})
 		
@@ -511,19 +492,6 @@
 		}
 		
 		$(document).ready(function() {
-			/* $("#jump").bind('click', function() {
-	    		$(".floorhost").html("你好");
-	    	}); */
-	    	
-	    	$(".pager a").bind('click', function() {
-	    		
-	    		/* $post("/HealthyRoom1.0/updateThemeItem"), {
-	    			itemId : $(this).text()
-	    		}, function (data, textStatus) {
-	    			
-	    		}; */
-	    	});
-	    	
 			$("#logindialogspan").load("<%=base%>/pages/action_include/logindialog.jsp");
 			$("#accomplishUserInfo").load("<%=base%>/pages/action_include/accomplishUserInfo.jsp");
 			$("#spanalterPassword").load("<%=base%>/pages/action_include/alterpassword.html");

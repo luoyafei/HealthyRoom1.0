@@ -23,23 +23,15 @@
 
 <title>西科梦想减肥健身行</title>
 
-<!-- Bootstrap core CSS -->
-<link href="../assets/bootstrap-3.3.5/dist/css/bootstrap.min.css"
-	type="text/css" rel="stylesheet" />
-
-<!-- Custom styles for this template -->
-<link href="dashboard.css" rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script
-	src="../assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<link href="../assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<link href="dashboard.css" rel="stylesheet">
+	<script src="../assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
+	<script src="../assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
+	<script src="../assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
+	<script src="../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
+	<script src="../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/replaceImg.js"></script>
+    
     <style>
     	.col-md-4,.col-md-8,.col-md-10{
     		text-align: center;
@@ -69,8 +61,24 @@
 					<li><a class="text-primary"
 						href="<%=base%>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
 					<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp">看健身房</a></li>
-					<jsp:include page="../../modul/barSearch.jsp" flush="true"></jsp:include>
-
+					<form action="/HealthyRoom1.0/SearchThemeAction" method="post" class="navbar-form navbar-left" role="search" onsubmit="return chechSearchValue()">
+						<div class="form-group">
+							<input type="text" name="searchTheme" id="searchTheme" class="form-control" placeholder="Search">
+						</div>
+						<button type="submit" class="btn btn-default">快速搜索</button>
+					</form>
+					
+					<script>
+						function chechSearchValue() {
+							if($("#searchTheme").val().trim() != "" && $("#searchTheme").val().trim().length < 10)
+								return true;
+							else {
+								alert("请输入您想搜索的主题内容的关键字！请将字数限制在10个以内!");
+								return false;
+							}
+								
+						}
+					</script>
 				</ul>
 				<div class="navbar-form pull-right">
 
@@ -334,17 +342,6 @@
         <!-- <div id="accomplishUserInfo"></div> -->
       </div>
     </div>
-	<!-- Bootstrap core JavaScript
-	    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="../assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
-	<script src="../assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
-	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-	<script
-		src="../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script
-		src="../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 	<div id="logindialogspan"></div>
 	<div id="uploadPicture"></div>
 	<script>

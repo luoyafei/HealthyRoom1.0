@@ -121,6 +121,18 @@
 					  		<div id="healthyforum">
 					  			<div style="background-color: #F5F5F5;opacity: 0.75;">
 					<div style="width: 100%;height: 100%;">
+					<table class="table table-hover">
+						<thead>
+			                <tr>
+			                  <th>#</th>
+			                  <th>Header</th>
+			                  <th>Header</th>
+			                  <th>Header</th>
+			                  <th>Header</th>
+			                </tr>
+			              </thead>
+			              <tbody>
+						
 					<%
 					String itemIdStr = request.getParameter("itemId");
 					int allThemeItems = UserManager.getInstance().getAllHealthyNum();//获取所有的健身房数目
@@ -157,7 +169,9 @@
 						//int contAmount = UserManager.getInstance().getTotleThemeReply(theme.getThemeId());
 					%>
 					
-						<div class="healthyInfo" style="width: 100%;height: 150px;margin: 20px auto;border-bottom: solid black 1px;">
+					
+					
+						<%-- <div class="healthyInfo" style="width: 100%;height: 150px;margin: 20px auto;border-bottom: solid black 1px;">
 				               <div class="main-left" style="float: left;">
 				                   <div class="img1" style="margin-right: 10px;height: 150px;">
 				                       <div style="height:80%;">
@@ -175,7 +189,7 @@
 				               		<h4 style="text-align: left;width: 100%;height: 70px;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">简介: &nbsp;&nbsp;</span><%=gymintroduce %></h4>
 				               		<h4 style="float: right;"><%=phr.getGymPublishDate() %></h4>
 				               </div>
-				           </div>
+				           </div> --%>
 											           
 <!-- #########################################点击健身房名称后出现的信息详情框 -->
 							<div class="modal fade bs-example-modal-lg" id="<%=tel %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -280,6 +294,7 @@
 				           
 				           
 					<%} %>
+					</table>
 					
 					<nav>
 					  <ul class="pager">

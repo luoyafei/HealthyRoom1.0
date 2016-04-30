@@ -28,6 +28,7 @@
 		<script src="../../assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
 		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/vendor/holder.min.js"></script>
 		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+		<script src="../js/replaceImg.js"></script>
 		<style>
 			.col-md-4,
 			.col-md-8,

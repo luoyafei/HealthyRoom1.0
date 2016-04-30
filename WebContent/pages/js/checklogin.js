@@ -31,7 +31,8 @@
 												//alert(xmlhttp.responseText);
 												addNodePswOk();
 												$('#myModal').modal('hide');
-												$("#login-register-bar").load("/HealthyRoom1.0/index_user.jsp");
+												$("#login-register-bar").load("/HealthyRoom1.0/pages/user_login_external/load_login.jsp");
+												window.location.reload();
 											} else {
 												addNodePswRemove();
 												$("#modal-email").focus();

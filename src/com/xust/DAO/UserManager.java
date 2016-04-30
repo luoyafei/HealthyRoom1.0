@@ -60,6 +60,10 @@ public class UserManager {
 		return dao.getCurrentTheme(itemId);
 	}
 	
+	public ArrayList<Theme> getCurrentThemeInSearch(String searchText,int itemId) {
+		return dao.getCurrentThemeInSearch(searchText, itemId);
+	}
+	
 	public ArrayList<PublishHealthyRoom> getCurrentPubHeaRoom(int itemId) {
 		return dao.getCurrentPubHeaRoom(itemId);
 	}

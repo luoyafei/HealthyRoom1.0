@@ -33,7 +33,7 @@ public class UserMysqlDAO implements UserDAO {
 			rs = pstmt.executeQuery();
 			rs.next();
 			resultSize = rs.getInt(1);
-System.out.println(sql + "," + para + ":" + resultSize);			
+//System.out.println(sql + "," + para + ":" + resultSize);
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -42,6 +42,52 @@ System.out.println(sql + "," + para + ":" + resultSize);
 			JDBCUtil.closedRs(rs);
 		}
 		return resultSize;
+	}
+	
+	@Override
+	public java.util.ArrayList<Theme> getCurrentThemeInSearch(String searchText, int itemId) {
+		
+		ArrayList<Theme> themes = new ArrayList<Theme>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int startNum = itemId * 5; 
+		String sql = "select * from theme where cont like ? order by themeId desc limit ?,5";
+//System.out.println(sql);
+		ResultSet rs = null;
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = JDBCUtil.preparedStatement(conn, sql);
+			String para = "%" + searchText + "%";
+			pstmt.setString(1, para);
+			pstmt.setInt(2, startNum);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Theme theme = new Theme();
+				theme.setThemeId(rs.getInt(1));
+				theme.setUserId(rs.getInt(2));
+				theme.setTitle(rs.getString(3));
+				theme.setCont(rs.getString(4));
+				theme.setPicture(rs.getString(5));
+				theme.setPublishtime(rs.getDate(6));
+				theme.setContAmount(rs.getInt(7));
+				theme.setHadRead(rs.getInt(8));
+				
+				themes.add(theme);
+			}
+//System.out.println(themes.size());
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if(conn != null)
+				JDBCUtil.closedConn(conn);
+			if(pstmt != null)
+				JDBCUtil.closedStmt(pstmt);
+			if(rs != null)
+				JDBCUtil.closedRs(rs);
+		}
+		return themes; 
 	}
 
 	@Override

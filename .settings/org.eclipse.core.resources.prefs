@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/index.jsp=UTF-8
+encoding//WebContent/modul/barSearch.jsp=UTF-8
 encoding//WebContent/pages/action_include/alterpassword.html=UTF-8
 encoding//WebContent/pages/action_include/logindialog.jsp=UTF-8
 encoding//WebContent/pages/myHealthyPlan.html=UTF-8

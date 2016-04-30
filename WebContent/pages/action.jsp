@@ -69,12 +69,7 @@
 					<li><a class="text-primary"
 						href="<%=base%>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
 					<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp">看健身房</a></li>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search">
-						</div>
-						<button type="submit" class="btn btn-default">快速搜索</button>
-					</form>
+					<jsp:include page="../../modul/barSearch.jsp" flush="true"></jsp:include>
 
 				</ul>
 				<div class="navbar-form pull-right">

@@ -1,13 +1,13 @@
 package com.xust.action;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.xust.DAO.UserManager;
 
@@ -33,16 +33,19 @@ public class SearchThemeAction extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=utf-8");;
-		
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = request.getSession(true);
 		String searchText = request.getParameter("searchTheme");
 		Integer isHaveItem = UserManager.getInstance().getSearchThemeListSize(searchText);
-
-		PrintWriter out = response.getWriter();
-		out.println(searchText + ":" + isHaveItem);
-		out.flush();
-		out.close();
-		
+		if(isHaveItem == 0) {
+			response.sendRedirect("/HealthyRoom1.0/pages/public_visit/searchThemeResultNull.jsp");
+			return;
+		} else {
+			session.removeAttribute("searchText");
+			session.setAttribute("searchText", searchText);
+			response.sendRedirect("/HealthyRoom1.0/pages/public_visit/searchThemeResult.jsp");
+			return;
+		}
 	}
 
 	/**

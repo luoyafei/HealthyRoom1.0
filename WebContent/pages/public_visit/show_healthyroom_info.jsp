@@ -20,28 +20,11 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="icon" href="../../../favicon.ico">
-
 		<title>展示健身房信息</title>
 
-		<!-- Bootstrap core CSS -->
 		<link href="../../assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-
-		<!-- Custom styles for this template -->
 		<link href="../dashboard.css" rel="stylesheet">
-
-		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 		<script src="../../assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
-		
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 		<style>
 			.col-md-4,
 			.col-md-8,
@@ -69,14 +52,9 @@
 					<ul class="nav navbar-nav">
 						<li><a href="<%=base %>/index.jsp">首页</a></li>
 						<li><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/about_our.jsp">关于我们</a></li>
-						<li><a class="text-primary" href="<%=base %>/pages/healthyforum/healthyforum.jsp">荟萃论坛</a></li>
+						<li><a class="text-primary" href=<%=session.getAttribute("userInfo")==null?"/HealthyRoom1.0/pages/public_visit/healthyforum.jsp":"/HealthyRoom1.0/pages/healthyforum/healthyforum.jsp" %>>荟萃论坛</a></li>
 						<li class="active"><a class="text-primary" href="/HealthyRoom1.0/pages/public_visit/show_healthyroom_info.jsp">看健身房</a></li>
-						<form class="navbar-form navbar-left" role="search">
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Search">
-							</div>
-							<button type="submit" class="btn btn-default">快速搜索</button>
-						</form>
+						<jsp:include page="../../modul/barSearch.jsp" flush="true"></jsp:include>
 
 					</ul>
 					<div class="navbar-form pull-right">

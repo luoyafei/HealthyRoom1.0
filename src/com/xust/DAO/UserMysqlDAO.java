@@ -150,7 +150,7 @@ public class UserMysqlDAO implements UserDAO {
 		| userId        | int(11)           | YES  | UNI | NULL             |                |
 		| userPhoto     | varchar(255)      | YES  |     | user_default.jpg |                |
 		| userIntroduce | varchar(255)      | YES  |     | NULL             |                |
-		| userGender    | enum('ÄÐ','Å®')   | YES  |     | NULL             |                |
+		| userGender    | enum('ï¿½ï¿½','Å®')   | YES  |     | NULL             |                |
 		| userHeight    | int(11)           | YES  |     | NULL             |                |
 		| userWeight    | int(11)           | YES  |     | NULL             |                |
 		| userBWH       | varchar(11)       | YES  |     | NULL             |                |
@@ -437,7 +437,7 @@ public class UserMysqlDAO implements UserDAO {
 		return flag;
 	}
 
-	//½øÐÐÉ¾³ýÖ÷Ìâ
+	//ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private boolean deleteThemeFunc(int themeIdNum) {
 		
 		boolean flag = true;
@@ -559,7 +559,7 @@ public class UserMysqlDAO implements UserDAO {
 		return flag;
 	}
 	
-	//½øÐÐ·¢²¼Ö÷ÌâÐÅÏ¢£¬ÐÅÏ¢µÄ²åÈë
+	//ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ä²ï¿½ï¿½ï¿½
 	public boolean publishThemeInfo(String theme, String content, String userId) {
 		boolean flag = true;
 		Connection conn = null;
@@ -681,7 +681,7 @@ public class UserMysqlDAO implements UserDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int startNum = itemId * 3; 
-		String sql = "select * from publishhealthyroom order by gymId desc limit ?,3";
+		String sql = "select * from publishhealthyroom order by gymId desc limit ?,12";
 		ResultSet rs = null;
 		try {
 			conn = JDBCUtil.getConnection();
@@ -869,14 +869,14 @@ public class UserMysqlDAO implements UserDAO {
 	}
 
 	@Override
-	public boolean replyTheme(int themeId, int userId, String content) {//»Ø¸´Ö÷Ìâ£¡
+	public boolean replyTheme(int themeId, int userId, String content) {//ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½â£¡
 		// TODO Auto-generated method stub
 		boolean flag = true;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "insert into replytheme (themeId, floorId, userId, replytime, cont) values(?, ?, ?, now(), ?)";
 		
-		PreparedStatement pstmt1 = null;//¼ÆËãµ±Ç°»Ø¸´ÊÇ¶àÉÙÂ¥²ã¡£
+		PreparedStatement pstmt1 = null;//ï¿½ï¿½ï¿½ãµ±Ç°ï¿½Ø¸ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½Â¥ï¿½ã¡£
 		ResultSet rs = null;
 		String sql1 = "select count(*) from replytheme where themeId = ?";
 		try {
@@ -887,7 +887,7 @@ public class UserMysqlDAO implements UserDAO {
 			pstmt1.setInt(1, themeId);
 			rs = pstmt1.executeQuery();
 			rs.next();
-			int floorId = rs.getInt(1) + 2;//Í¨¹ý»ñÈ¡µ±Ç°Ö÷ÌâµÄËùÓÐ»Ø¸´+2£¬µÃ³ö£¬¸Ã»Ø¸´µÄÂ¥²ãÊý
+			int floorId = rs.getInt(1) + 2;//Í¨ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»Ø¸ï¿½+2ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½Ã»Ø¸ï¿½ï¿½ï¿½Â¥ï¿½ï¿½ï¿½ï¿½
 			
 			pstmt = JDBCUtil.preparedStatement(conn, sql);
 			pstmt.setInt(1, themeId);
@@ -921,7 +921,7 @@ public class UserMysqlDAO implements UserDAO {
 	}
 
 	@Override
-	public ArrayList<ReplyTheme> getAllReplyTheme(int themeId) {//»ñÈ¡ËùÓÐµÄ»Ø¸´£¡
+	public ArrayList<ReplyTheme> getAllReplyTheme(int themeId) {//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ÐµÄ»Ø¸ï¿½ï¿½ï¿½
 		// TODO Auto-generated method stub
 		ArrayList<ReplyTheme> replyThemes = new ArrayList<ReplyTheme>();
 		Connection conn = null;

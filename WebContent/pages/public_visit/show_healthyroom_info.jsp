@@ -115,16 +115,28 @@
 		</nav>
 
 		<div class="container-fluid">
-			<div class="row" style="width:60%; height:100%; margin: 0 auto;">
+			<div class="row" style="width:80%; height:100%; margin: 0 auto;">
 				<div class="tab-content">
 					  <div role="tabpanel" class="tab-pane active" id="forum">
 					  		<div id="healthyforum">
 					  			<div style="background-color: #F5F5F5;opacity: 0.75;">
 					<div style="width: 100%;height: 100%;">
+					<table class="table table-hover">
+						<thead>
+			                <tr>
+			                  <th></th>
+			                  <th>健身房名称</th>
+			                  <th>简介</th>
+			                  <th>地址</th>
+			                  <th>联系电话</th>
+			                </tr>
+			              </thead>
+			              <tbody>
+						
 					<%
 					String itemIdStr = request.getParameter("itemId");
 					int allThemeItems = UserManager.getInstance().getAllHealthyNum();//获取所有的健身房数目
-					int allButtons = allThemeItems%3==0?allThemeItems/3:allThemeItems/3+1;//计算出分页的页数（此处设置每页显示5条）
+					int allButtons = allThemeItems%12==0?allThemeItems/12:allThemeItems/12+1;//计算出分页的页数（此处设置每页显示5条）
 					try {
 						if(itemIdStr == null) {
 							itemIdStr = "1";
@@ -156,26 +168,14 @@
 						String price = phr.getGymPrice();
 						//int contAmount = UserManager.getInstance().getTotleThemeReply(theme.getThemeId());
 					%>
-					
-						<div class="healthyInfo" style="width: 100%;height: 150px;margin: 20px auto;border-bottom: solid black 1px;">
-				               <div class="main-left" style="float: left;">
-				                   <div class="img1" style="margin-right: 10px;height: 150px;">
-				                       <div style="height:80%;">
-				                       		<img class="img-thumbnail" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=tel+"0" %>.jpg" alt="" style="width:120px;height: 100%;">
-				                       		<img class="img-thumbnail" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=tel+"1" %>.jpg" alt="" style="width:120px;height: 100%;">
-				                       		<img class="img-thumbnail" src="/HealthyRoom1.0/business_healthyroomUp/img/<%=tel+"2" %>.jpg" alt="" style="width:120px;height: 100%;">
-				                       </div>
-				                       <div style="height:18%;margin-top: 1%;">
-				                       		<span style="float:left;margin-left:10px;font-size: 18px;font-weight: bold;" class="floorhost">地址：<%=address %></span>
-				                       </div>
-				                   </div>
-				               </div>
-				               <div class="main-right" style="text-align: left;height: 180px;">
-				               		<h3><a class="healthyName" href="javascript:void(0);" onclick="$('#<%=tel %>').modal('show');" style="font-weight: bolder;text-decoration: none;"><%=gymname %></a></h3>
-				               		<h4 style="text-align: left;width: 100%;height: 70px;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">简介: &nbsp;&nbsp;</span><%=gymintroduce %></h4>
-				               		<h4 style="float: right;"><%=phr.getGymPublishDate() %></h4>
-				               </div>
-				           </div>
+						
+						<tr>
+							<td></td>
+							<td><a class="healthyName" href="javascript:void(0);" onclick="$('#<%=tel %>').modal('show');" style="font-weight: bolder;text-decoration: none;"><%=gymname %></a></td>
+							<td><%=gymintroduce %></td>
+							<td><%=address %></td>
+							<td><%=tel %></td>
+						</tr>
 											           
 <!-- #########################################点击健身房名称后出现的信息详情框 -->
 							<div class="modal fade bs-example-modal-lg" id="<%=tel %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -280,6 +280,8 @@
 				           
 				           
 					<%} %>
+					</tbody>
+					</table>
 					
 					<nav>
 					  <ul class="pager">

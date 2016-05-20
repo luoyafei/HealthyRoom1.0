@@ -258,7 +258,7 @@
 					  </ul>
 					</nav>
 					
-						<form action="<%=base %>/DealPublishTheme" method="post" onsubmit="checkcontent()">
+						<form action="<%=base %>/DealPublishTheme" method="post" onsubmit="return checkcontent()">
 							<div style="width: 100%;height: 100%;margin: 0 auto;">
 								<div class="input-group" style="width: 100%;height: 20%;">
 									<span class="input-group-addon">发表主题&nbsp;<span class="glyphicon glyphicon-pencil"></span></span>
@@ -319,18 +319,6 @@
 		}
 		
 		$(document).ready(function() {
-			/* $("#jump").bind('click', function() {
-	    		$(".floorhost").html("你好");
-	    	}); */
-	    	
-	    	$(".pager a").bind('click', function() {
-	    		
-	    		/* $post("/HealthyRoom1.0/updateThemeItem"), {
-	    			itemId : $(this).text()
-	    		}, function (data, textStatus) {
-	    			
-	    		}; */
-	    	});
 	    	
 			$("#logindialogspan").load("<%=base %>/pages/action_include/logindialog.jsp");
 			$("#accomplishUserInfo").load("<%=base %>/pages/action_include/accomplishUserInfo.jsp");

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.xust.bean.User;
+
 /**
  * Servlet Filter implementation class CheckUser
  */
@@ -45,7 +47,6 @@ public class CheckUser implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		HttpSession session = req.getSession(false);
-		
 		if(session == null || session.getAttribute("userInfo")==null) {
 			resp.sendRedirect("/HealthyRoom1.0/index.jsp");
 			return;

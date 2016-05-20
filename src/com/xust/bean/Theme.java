@@ -11,7 +11,7 @@ public class Theme {
 	private String picture;
 	private Date publishtime;
 	private int contAmount;
-	private int hadRead;
+	private int hadRead = 0;
 	
 	public int getHadRead() {
 		return hadRead;

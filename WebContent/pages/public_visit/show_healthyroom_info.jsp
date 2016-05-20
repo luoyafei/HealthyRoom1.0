@@ -346,5 +346,19 @@
 		}
 		
 		</script>
+		<div style="width:100%; background-color: #333333;">
+			<div class="container">
+				<footer>
+					<p class="pull-right">
+						<a href="#">Back to top</a>
+					</p>
+					<p>
+						<span style="color:white;">&copy; 2015 cuiluozhou &middot;</span> <a href="#">XIKEDA</a> &middot;
+					</p>
+				</footer>
+			</div>
+		</div>
+		
+		
 	</body>
 </html>

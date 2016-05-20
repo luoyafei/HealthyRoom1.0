@@ -9,8 +9,6 @@
 	String base = request.getContextPath();
 
 %>
-
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -31,7 +29,7 @@
 
 <body style="padding-bottom: 0px;">
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<nav class="navbar navbar-inverse" style="margin-bottom: 0px;">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
@@ -68,6 +66,15 @@
 			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 			<li data-target="#myCarousel" data-slide-to="1"></li>
 			<li data-target="#myCarousel" data-slide-to="2"></li>
+			<li data-target="#myCarousel" data-slide-to="3"></li>
+			<li data-target="#myCarousel" data-slide-to="4"></li>
+			<li data-target="#myCarousel" data-slide-to="5"></li>
+			<li data-target="#myCarousel" data-slide-to="6"></li>
+			<li data-target="#myCarousel" data-slide-to="7"></li>
+			<li data-target="#myCarousel" data-slide-to="8"></li>
+			<li data-target="#myCarousel" data-slide-to="9"></li>
+			<li data-target="#myCarousel" data-slide-to="10"></li>
+			<li data-target="#myCarousel" data-slide-to="11"></li>
 		</ol>
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
@@ -91,6 +98,85 @@
 			<div class="item">
 				<img class="third-slide" src="assets/img/newpicture/3.jpg"
 					alt="Third slide">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>西科梦想减肥健身行</h1>
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<img class="second-slide" src="assets/img/newpicture/4.jpg"
+					alt="Second slide">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>西科梦想减肥健身行</h1>
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<img class="second-slide" src="assets/img/newpicture/5.jpg"
+					alt="Second slide">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>西科梦想减肥健身行</h1>
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<img class="second-slide" src="assets/img/newpicture/6.jpg"
+					alt="Second slide">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>西科梦想减肥健身行</h1>
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<img class="second-slide" src="assets/img/newpicture/7.jpg"
+					alt="Second slide">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>西科梦想减肥健身行</h1>
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<img class="second-slide" src="assets/img/newpicture/8.jpg"
+					alt="Second slide">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>西科梦想减肥健身行</h1>
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<img class="second-slide" src="assets/img/newpicture/9.jpg"
+					alt="Second slide">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>西科梦想减肥健身行</h1>
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<img class="second-slide" src="assets/img/newpicture/10.jpg"
+					alt="Second slide">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>西科梦想减肥健身行</h1>
+					</div>
+				</div>
+			</div><div class="item">
+				<img class="second-slide" src="assets/img/newpicture/11.jpg"
+					alt="Second slide">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>西科梦想减肥健身行</h1>
+					</div>
+				</div>
+			</div><div class="item">
+				<img class="second-slide" src="assets/img/newpicture/12.jpg"
+					alt="Second slide">
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>西科梦想减肥健身行</h1>
